@@ -18,8 +18,9 @@ Once the above has been gathered:
 * Fix the ``omt:osm-openmaptiles`` data source location to match the MBTiles file downladed at point 4
 * Fix the ``natural_earth_shaded_relief:natural_earth_shaded_relief`` URL parameter to match the file downloaded at point 5
 
-Go to thelayer preview, choose the ``osm-bright-gl`` group, and you should be greeted by this preview:
+Go to the layer preview, choose the ``osm-bright-gl`` group, and you should be greeted by this preview:
 
+![osm-bright-gl preview](osm-bright-gl.png)
 
 # Notes on the styles and rendering
 
