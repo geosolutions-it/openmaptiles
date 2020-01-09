@@ -1,0 +1,20 @@
+<layerGroup>
+  <id>LayerGroupInfoImpl-416bade8:16eb18de880:-7f8e</id>
+  <name>osm-bright-gl</name>
+  <mode>SINGLE</mode>
+  <publishables>
+    <published/>
+  </publishables>
+  <styles>
+    <style>
+      <id>StyleInfoImpl-4c2a24d5:16eb16f5c77:-7ffb</id>
+    </style>
+  </styles>
+  <bounds>
+    <minx>-2.0037508342789244E7</minx>
+    <maxx>2.0037508342789244E7</maxx>
+    <miny>-2.00489661040146E7</miny>
+    <maxy>2.0048966104014594E7</maxy>
+    <crs class="projected">EPSG:3857</crs>
+  </bounds>
+</layerGroup>

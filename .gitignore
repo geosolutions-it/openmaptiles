@@ -1,0 +1,6 @@
+gwc
+logs/geoserver.*
+monitoring
+params-extractor
+legendsamples
+download.properties

@@ -1,0 +1,21 @@
+<layerGroup>
+  <id>LayerGroupInfoImpl--3cd36b64:16ef62e2f71:-7ff6</id>
+  <name>positron-gl</name>
+  <mode>SINGLE</mode>
+  <publishables>
+    <published/>
+  </publishables>
+  <styles>
+    <style>
+      <id>StyleInfoImpl--3cd36b64:16ef62e2f71:-7ffc</id>
+    </style>
+  </styles>
+  <bounds>
+    <minx>-2.0037508342789244E7</minx>
+    <maxx>2.0037508342789244E7</maxx>
+    <miny>-2.00489661040146E7</miny>
+    <maxy>2.0048966104014594E7</maxy>
+    <crs class="projected">EPSG:3857</crs>
+  </bounds>
+  <dateCreated>2019-12-12 09:44:43.780 UTC</dateCreated>
+</layerGroup>

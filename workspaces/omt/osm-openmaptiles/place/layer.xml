@@ -1,0 +1,16 @@
+<layer>
+  <name>place</name>
+  <id>LayerInfoImpl--516a1bd1:16e8d9353f3:-7fe7</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-78ff667e:12476299803:-7ff9</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--516a1bd1:16e8d9353f3:-7fe8</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2019-11-21 10:51:39.917 UTC</dateCreated>
+</layer>

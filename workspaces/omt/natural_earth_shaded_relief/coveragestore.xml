@@ -1,0 +1,12 @@
+<coverageStore>
+  <id>CoverageStoreInfoImpl-6edd2b4a:16ef992e608:-7ff9</id>
+  <name>natural_earth_shaded_relief</name>
+  <type>GeoTIFF</type>
+  <enabled>true</enabled>
+  <workspace>
+    <id>WorkspaceInfoImpl-78ff667e:12476299803:-7ffd</id>
+  </workspace>
+  <__default>false</__default>
+  <dateCreated>2019-12-12 10:15:28.52 UTC</dateCreated>
+  <url>/home/aaime/devel/gisData/naturalEarth/NE2_HR_LC_SR.tif</url>
+</coverageStore>

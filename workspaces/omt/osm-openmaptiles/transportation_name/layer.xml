@@ -1,0 +1,16 @@
+<layer>
+  <name>transportation_name</name>
+  <id>LayerInfoImpl--516a1bd1:16e8d9353f3:-7fde</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-78ff667e:12476299803:-7ff9</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--516a1bd1:16e8d9353f3:-7fdf</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2019-11-21 10:53:23.246 UTC</dateCreated>
+</layer>

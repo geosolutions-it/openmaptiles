@@ -1,0 +1,18 @@
+<dataStore>
+  <id>DataStoreInfoImpl--73e6758a:16e8d6b0be2:-7ffa</id>
+  <name>osm-openmaptiles</name>
+  <description>file:///home/aaime/devel/openmaptiles/openmaptiles/data/tiles.mbtiles</description>
+  <type>MBTiles with vector tiles</type>
+  <enabled>true</enabled>
+  <workspace>
+    <id>WorkspaceInfoImpl-78ff667e:12476299803:-7ffd</id>
+  </workspace>
+  <connectionParameters>
+    <entry key="database">/home/aaime/devel/gisData/openmaptiles/2017-07-03_europe_italy.mbtiles</entry>
+    <entry key="dbtype">mbtiles</entry>
+    <entry key="namespace">http://www.geoserver.org/omt</entry>
+  </connectionParameters>
+  <__default>false</__default>
+  <dateCreated>2019-11-21 10:19:49.492 UTC</dateCreated>
+  <dateModified>2020-01-09 10:38:30.376 UTC</dateModified>
+</dataStore>
