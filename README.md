@@ -31,5 +31,5 @@ between style and data available for download. In particular:
 * The ``iso_a2`` attribute is not available in ``place``
 * The ``level`` attribute is not available in ``poi``
 
-At the time of writing the ``osm-bright-gl`` renders with reasonable fidelity and output (while ther are still differences) 
+At the time of writing the ``osm-bright-gl`` renders with reasonable fidelity and output (there are still visible differences) 
 while the other available styles need more work in the style translation engine to display properly.
