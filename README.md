@@ -2,34 +2,49 @@
 
 This repository contains a GeoServer data directory that will render OpenMapTiles maps using:
 * MBTiles filled with Mapbox Vector Tiles as the source
-* Mapbox GL Styles for the styling
+* Well known [Maplibre GL styles](https://maplibre.org/maplibre-style-spec/) for the styling.
+
+## GeoServer setup
 
 In order to use this data directory you'll need:
-1. A recent version of GeoServer, 2.17.x or newer. At the time of writing, January 2020, you'll need to pick the [nightly builds](https://build.geoserver.org/geoserver/master/), in the future a stable version might be usable too.
-2. The [MBStyles community module](https://build.geoserver.org/geoserver/master/community-latest/)
-3. The [MBTiles store community module](https://build.geoserver.org/geoserver/master/community-latest), in particular, the ``geoserver-<version>-mbtiles-store-plugin.zip`` file).
-4. Download the [OpenMapTiles.com](https://openmaptiles.com/downloads/planet/) "OpenStreetMap vector tiles" file of the desired area (free only for non commercial usage)
-5. Download the [Natural Earth II with Shaded Relief and Water
-](https://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-2/) raster background
 
-Once the above has been gathered:
-* Install GeoServer and the extensions
-* Start it up, pointing it at this data directory
-* Fix the ``omt:osm-openmaptiles`` data source location to match the MBTiles file downladed at point 4
-* Fix the ``natural_earth_shaded_relief:natural_earth_shaded_relief`` URL parameter to match the file downloaded at point 5
+1. A recent version of GeoServer.
+2. The [MBStyles extension](https://docs.geoserver.org/stable/en/user/styling/mbstyle/installing.html), found from the release page of the chosen GeoServer version.
+3. The [MBTiles store community module](https://docs.geoserver.org/stable/en/user/community/mbtiles/installing.html) (the mbtiles-store-plugin), found from the nightly builds of the same GeoServer series
 
-Go to the layer preview, choose the ``osm-bright-gl`` group, and you should be greeted by this preview:
+For example, if the chosen GeoServer version is 2.26.1, then:
+* Go to the download page of the 2.26.1 release, download the mbstyles extension, and unzip it in ``geoserver/WEB-INF/lib``
+* Go to the [nightly builds for the 2.26.x series](https://build.geoserver.org/geoserver/2.26.x/community-latest/), download the mbtiles-store-plugin, and then unzip it in ``geoserver/WEB-INF/lib``
+* Restart GeoServer for it to notice the plugins
 
-![osm-bright-gl preview](osm-bright-gl.png)
+## Data directory setup
 
-# Notes on the styles and rendering
+The data directory in this repository contains the full configuration for GeoServer, but it lacks the source data and some fonts, as they are too big to be stored in this repository.
 
-The styles available in this data directory have been modified from their original version to care for some discrepancies
-between style and data available for download. In particular:
-* The ``aerodrome_labels`` layer is not available
-* The ``brunnel`` and ``intermittent`` attributes are not available in the ``waterway`` layer
-* The ``iso_a2`` attribute is not available in ``place``
-* The ``level`` attribute is not available in ``poi``
+First, let's grab the source vector data. Download the [OpenMapTiles.com](https://openmaptiles.com/downloads/planet/) "OpenStreetMap vector tiles" file of the desired area (free only for non commercial usage).
+Mind, the dataset for the whole world is north of 75GB.
 
-At the time of writing the ``osm-bright-gl`` renders with reasonable fidelity and output (there are still visible differences) 
-while the other available styles need more work in the style translation engine to display properly.
+Rename the downloaded file as ``maptiler-osm-planet.mbtiles`` and place it inside the ``data`` folder of this data directory.
+
+Second, download the [Natural Earth II with Shaded Relief and Water
+](https://www.dropbox.com/scl/fi/o6vj1qrsi7b9v7mu6tlf1/NE2_HR_LC_SR_W_COG.tif?rlkey=wgbd8yytqhdr8g5c7q5q74lry&st=dld4sb3e&dl=1) raster background we have already optimized for you, and also it inside the ``data`` folder of this data directory.
+
+When done, the file system should look as follows:
+
+![](images/data.png)
+
+Finally, some of these maps requires a rather rich set of fonts, to display labels in a variety of scripts. Download the [openmaptiles-fonts.zip](https://www.dropbox.com/scl/fi/o6vj1qrsi7b9v7mu6tlf1/NE2_HR_LC_SR_W_COG.tif?rlkey=wgbd8yytqhdr8g5c7q5q74lry&st=bicwwybk&dl=1) and unpack its contents inside the ``styles`` folder of this data directory. 
+
+When done, the file system should look as follows:
+
+![](images/fonts.png)
+
+## Previewing the various maps
+
+Once the above is done, start GeoServer and go for the layer preview.
+You should see a number of layer groups:
+
+![](images/preview.png)
+
+Here is how each one would look, in the area of Manhattan, New York, USA.
+
