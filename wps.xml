@@ -40,8 +40,17 @@
       <factoryClass>org.geotools.process.vector.VectorProcessFactory</factoryClass>
       <enabled>true</enabled>
     </processGroup>
+    <processGroup>
+      <factoryClass>org.geotools.process.geometry.CenterLineProcess</factoryClass>
+      <enabled>true</enabled>
+    </processGroup>
+    <processGroup>
+      <factoryClass>org.geotools.process.geometry.SkeletonizeProcess</factoryClass>
+      <enabled>true</enabled>
+    </processGroup>
   </processGroups>
   <maxComplexInputSize>0</maxComplexInputSize>
   <maxSynchronousExecutionTime>0</maxSynchronousExecutionTime>
   <maxAsynchronousExecutionTime>0</maxAsynchronousExecutionTime>
+  <remoteInputDisabled>false</remoteInputDisabled>
 </wps>

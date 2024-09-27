@@ -8,11 +8,12 @@
     <id>WorkspaceInfoImpl-78ff667e:12476299803:-7ffd</id>
   </workspace>
   <connectionParameters>
-    <entry key="database">/home/aaime/devel/gisData/openmaptiles/2017-07-03_europe_italy.mbtiles</entry>
+    <entry key="database">file:data/maptiler-osm-planet.mbtiles</entry>
     <entry key="dbtype">mbtiles</entry>
     <entry key="namespace">http://www.geoserver.org/omt</entry>
   </connectionParameters>
   <__default>false</__default>
   <dateCreated>2019-11-21 10:19:49.492 UTC</dateCreated>
-  <dateModified>2020-01-09 10:38:30.376 UTC</dateModified>
+  <dateModified>2024-09-24 15:02:02.717 UTC</dateModified>
+  <disableOnConnFailure>false</disableOnConnFailure>
 </dataStore>

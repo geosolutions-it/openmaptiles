@@ -1,59 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><sld:StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xmlns:sld="http://www.opengis.net/sld" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" version="1.0.0">
+<?xml version="1.0" encoding="UTF-8"?><sld:StyledLayerDescriptor xmlns:sld="http://www.opengis.net/sld" xmlns="http://www.opengis.net/sld" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" version="1.0.0">
   <sld:Name>Bright</sld:Name>
-  <sld:UserLayer>
-    <sld:Name>background</sld:Name>
-    <sld:InlineFeature>
-      <FeatureCollection>
-        <gml:boundedBy>
-          <gml:Box srsName="4326">
-            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-180,-90 180,90</gml:coordinates>
-          </gml:Box>
-        </gml:boundedBy>
-        <gml:featureMember>
-          <gml:background fid="background">
-            <gml:geometry>
-              <gml:Polygon srsName="4326">
-                <gml:outerBoundaryIs>
-                  <gml:LinearRing>
-                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-180,-90 -180,90 180,90 180,-90 -180,-90</gml:coordinates>
-                  </gml:LinearRing>
-                </gml:outerBoundaryIs>
-              </gml:Polygon>
-            </gml:geometry>
-          </gml:background>
-        </gml:featureMember>
-      </FeatureCollection>
-    </sld:InlineFeature>
-    <sld:LayerFeatureConstraints>
-      <sld:FeatureTypeConstraint/>
-    </sld:LayerFeatureConstraints>
-    <sld:UserStyle>
-      <sld:Name>Default Styler</sld:Name>
-      <sld:FeatureTypeStyle>
-        <sld:Name>background</sld:Name>
-        <sld:Title>MBStyle background</sld:Title>
-        <sld:Abstract>Generated for null</sld:Abstract>
-        <sld:SemanticTypeIdentifier>POLYGON</sld:SemanticTypeIdentifier>
-        <sld:Rule>
-          <sld:Name>background</sld:Name>
-          <sld:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
-            <sld:Geometry>
-              <ogc:Function name="env">
-                <ogc:Literal>wms_bbox</ogc:Literal>
-              </ogc:Function>
-            </sld:Geometry>
-            <sld:Fill>
-              <sld:CssParameter name="fill">#F8F4F0</sld:CssParameter>
-            </sld:Fill>
-          </sld:PolygonSymbolizer>
-        </sld:Rule>
-      </sld:FeatureTypeStyle>
-    </sld:UserStyle>
-  </sld:UserLayer>
   <sld:NamedLayer>
     <sld:Name>landcover</sld:Name>
     <sld:UserStyle>
       <sld:Name>Default Styler</sld:Name>
+      <sld:Background>
+        <sld:CssParameter name="fill">#F8F4F0</sld:CssParameter>
+      </sld:Background>
       <sld:FeatureTypeStyle>
         <sld:Name>landcover-glacier</sld:Name>
         <sld:Title>MBStyle landcover-glacier</sld:Title>
@@ -234,8 +187,13 @@
                 </ogc:Not>
               </ogc:And>
               <ogc:PropertyIsEqualTo>
-                <ogc:PropertyName>class</ogc:PropertyName>
-                <ogc:Literal>industrial</ogc:Literal>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>industrial</ogc:Literal>
+                  <ogc:Literal>garages</ogc:Literal>
+                  <ogc:Literal>dam</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -433,6 +391,90 @@
     <sld:UserStyle>
       <sld:Name>Default Styler</sld:Name>
       <sld:FeatureTypeStyle>
+        <sld:Name>waterway_tunnel</sld:Name>
+        <sld:Title>MBStyle waterway_tunnel</sld:Title>
+        <sld:Abstract>Generated for waterway</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>waterway_tunnel</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>river</ogc:Literal>
+                  <ogc:Literal>stream</ogc:Literal>
+                  <ogc:Literal>canal</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:MaxScaleDenominator>17061.836668423246</sld:MaxScaleDenominator>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#A0C8F0</sld:CssParameter>
+              <sld:CssParameter name="stroke-linecap">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">mitre</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.3</ogc:Literal>
+                  <ogc:Literal>13</ogc:Literal>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>6</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>2</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.3</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>0.5</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>6</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>4</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.3</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>0.5</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>6</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>waterway-other</sld:Name>
         <sld:Title>MBStyle waterway-other</sld:Title>
         <sld:Abstract>Generated for waterway</sld:Abstract>
@@ -449,6 +491,10 @@
                   <ogc:Literal>stream</ogc:Literal>
                 </ogc:Function>
                 <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>intermittent</ogc:PropertyName>
+                <ogc:Literal>0</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -478,6 +524,89 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
+        <sld:Name>waterway-other-intermittent</sld:Name>
+        <sld:Title>MBStyle waterway-other-intermittent</sld:Title>
+        <sld:Abstract>Generated for waterway</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>waterway-other-intermittent</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>canal</ogc:Literal>
+                  <ogc:Literal>river</ogc:Literal>
+                  <ogc:Literal>stream</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>intermittent</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#A0C8F0</sld:CssParameter>
+              <sld:CssParameter name="stroke-linecap">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">mitre</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.3</ogc:Literal>
+                  <ogc:Literal>13</ogc:Literal>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>2</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>4</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.3</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>0.5</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>2</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>3</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.3</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>0.5</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>2</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>waterway-stream-canal</sld:Name>
         <sld:Title>MBStyle waterway-stream-canal</sld:Title>
         <sld:Abstract>Generated for waterway</sld:Abstract>
@@ -493,6 +622,14 @@
                   <ogc:Literal>stream</ogc:Literal>
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>intermittent</ogc:PropertyName>
+                <ogc:Literal>0</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -522,6 +659,92 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
+        <sld:Name>waterway-stream-canal-intermittent</sld:Name>
+        <sld:Title>MBStyle waterway-stream-canal-intermittent</sld:Title>
+        <sld:Abstract>Generated for waterway</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>waterway-stream-canal-intermittent</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>canal</ogc:Literal>
+                  <ogc:Literal>stream</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>intermittent</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#A0C8F0</sld:CssParameter>
+              <sld:CssParameter name="stroke-linecap">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">mitre</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.3</ogc:Literal>
+                  <ogc:Literal>13</ogc:Literal>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>6</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>4</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.3</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>0.5</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>6</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>3</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.3</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>0.5</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>6</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>waterway-river</sld:Name>
         <sld:Title>MBStyle waterway-river</sld:Title>
         <sld:Abstract>Generated for waterway</sld:Abstract>
@@ -533,6 +756,14 @@
               <ogc:PropertyIsEqualTo>
                 <ogc:PropertyName>class</ogc:PropertyName>
                 <ogc:Literal>river</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>intermittent</ogc:PropertyName>
+                <ogc:Literal>0</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -555,6 +786,88 @@
                   <ogc:Literal>20</ogc:Literal>
                   <ogc:Literal>6</ogc:Literal>
                 </ogc:Function>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>waterway-river-intermittent</sld:Name>
+        <sld:Title>MBStyle waterway-river-intermittent</sld:Title>
+        <sld:Abstract>Generated for waterway</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>waterway-river-intermittent</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>river</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>intermittent</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#A0C8F0</sld:CssParameter>
+              <sld:CssParameter name="stroke-linecap">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">mitre</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>10</ogc:Literal>
+                  <ogc:Literal>0.8</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>6</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>3</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>10</ogc:Literal>
+                    <ogc:Literal>0.8</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>6</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>2.5</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>10</ogc:Literal>
+                    <ogc:Literal>0.8</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>6</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
               </sld:CssParameter>
             </sld:Stroke>
             <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
@@ -608,12 +921,51 @@
         <sld:SemanticTypeIdentifier>POLYGON</sld:SemanticTypeIdentifier>
         <sld:Rule>
           <sld:Name>water</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>intermittent</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
+            </ogc:And>
+          </ogc:Filter>
           <sld:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Fill>
               <sld:CssParameter name="fill">#BFD9F2</sld:CssParameter>
             </sld:Fill>
             <sld:Stroke>
               <sld:CssParameter name="stroke">#BFD9F2</sld:CssParameter>
+            </sld:Stroke>
+          </sld:PolygonSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>water-intermittent</sld:Name>
+        <sld:Title>MBStyle water-intermittent</sld:Title>
+        <sld:Abstract>Generated for water</sld:Abstract>
+        <sld:SemanticTypeIdentifier>POLYGON</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>water-intermittent</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>intermittent</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Fill>
+              <sld:CssParameter name="fill">#BFD9F2</sld:CssParameter>
+              <sld:CssParameter name="fill-opacity">0.7</sld:CssParameter>
+            </sld:Fill>
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#BFD9F2</sld:CssParameter>
+              <sld:CssParameter name="stroke-opacity">0.7</sld:CssParameter>
             </sld:Stroke>
           </sld:PolygonSymbolizer>
         </sld:Rule>
@@ -633,7 +985,7 @@
               <sld:GraphicFill>
                 <sld:Graphic>
                   <sld:ExternalGraphic>
-                    <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/osm-bright-gl-style/sprite#icon=${strURLEncode('wave')}&amp;size=${strURLEncode('1')}"/>
+                    <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode('wave')}&amp;size=${strURLEncode('1')}"/>
                     <sld:Format>mbsprite</sld:Format>
                   </sld:ExternalGraphic>
                   <sld:Displacement>
@@ -716,12 +1068,10 @@
         <sld:Rule>
           <sld:Name>landcover-sand</sld:Name>
           <ogc:Filter>
-            <ogc:And>
-              <ogc:PropertyIsEqualTo>
-                <ogc:PropertyName>class</ogc:PropertyName>
-                <ogc:Literal>sand</ogc:Literal>
-              </ogc:PropertyIsEqualTo>
-            </ogc:And>
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>class</ogc:PropertyName>
+              <ogc:Literal>sand</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <sld:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Fill>
@@ -925,6 +1275,99 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
+        <sld:Name>tunnel-motorway-link-casing</sld:Name>
+        <sld:Title>MBStyle tunnel-motorway-link-casing</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>tunnel-motorway-link-casing</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>motorway</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#C89366</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>12</ogc:Literal>
+                  <ogc:Literal>1</ogc:Literal>
+                  <ogc:Literal>13</ogc:Literal>
+                  <ogc:Literal>3</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                  <ogc:Literal>4</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>15</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>12</ogc:Literal>
+                    <ogc:Literal>1</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>3</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>4</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>15</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>0.25</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>12</ogc:Literal>
+                    <ogc:Literal>1</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>3</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>4</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>15</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>tunnel-minor-casing</sld:Name>
         <sld:Title>MBStyle tunnel-minor-casing</sld:Title>
         <sld:Abstract>Generated for transportation</sld:Abstract>
@@ -981,6 +1424,147 @@
                   <ogc:Literal>15</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>12</ogc:Literal>
+                    <ogc:Literal>0.5</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>1</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>4</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>15</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>0.25</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>12</ogc:Literal>
+                    <ogc:Literal>0.5</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>1</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>4</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>15</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>tunnel-link-casing</sld:Name>
+        <sld:Title>MBStyle tunnel-link-casing</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>tunnel-link-casing</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>trunk</ogc:Literal>
+                  <ogc:Literal>primary</ogc:Literal>
+                  <ogc:Literal>secondary</ogc:Literal>
+                  <ogc:Literal>tertiary</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#E9AC77</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>12</ogc:Literal>
+                  <ogc:Literal>1</ogc:Literal>
+                  <ogc:Literal>13</ogc:Literal>
+                  <ogc:Literal>3</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                  <ogc:Literal>4</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>15</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>12</ogc:Literal>
+                    <ogc:Literal>1</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>3</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>4</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>15</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>0.25</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>12</ogc:Literal>
+                    <ogc:Literal>1</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>3</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>4</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>15</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+              </sld:CssParameter>
             </sld:Stroke>
             <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
           </sld:LineSymbolizer>
@@ -1007,6 +1591,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -1027,6 +1615,40 @@
                   <ogc:Literal>20</ogc:Literal>
                   <ogc:Literal>17</ogc:Literal>
                 </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>8</ogc:Literal>
+                    <ogc:Literal>1.5</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>17</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>0.25</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>8</ogc:Literal>
+                    <ogc:Literal>1.5</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>17</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
               </sld:CssParameter>
             </sld:Stroke>
             <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
@@ -1054,6 +1676,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -1101,6 +1727,10 @@
                 <ogc:PropertyName>class</ogc:PropertyName>
                 <ogc:Literal>motorway</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -1174,6 +1804,213 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
+        <sld:Name>tunnel-path-steps-casing</sld:Name>
+        <sld:Title>MBStyle tunnel-path-steps-casing</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>tunnel-path-steps-casing</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="dimension">
+                  <ogc:Function name="geometry"/>
+                </ogc:Function>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>path</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>subclass</ogc:PropertyName>
+                <ogc:Literal>steps</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#CFCDCA</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-opacity">
+                <ogc:Function name="Interpolate">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>12</ogc:Literal>
+                  <ogc:Literal>0</ogc:Literal>
+                  <ogc:Literal>12.5</ogc:Literal>
+                  <ogc:Literal>1</ogc:Literal>
+                  <ogc:Literal>numeric</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>12</ogc:Literal>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Literal>13</ogc:Literal>
+                  <ogc:Literal>1</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                  <ogc:Literal>2</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>9.25</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>12</ogc:Literal>
+                    <ogc:Literal>0.5</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>1</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>2</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>9.25</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>0.25</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>12</ogc:Literal>
+                    <ogc:Literal>0.5</ogc:Literal>
+                    <ogc:Literal>13</ogc:Literal>
+                    <ogc:Literal>1</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>2</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>9.25</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>tunnel-path-steps</sld:Name>
+        <sld:Title>MBStyle tunnel-path-steps</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>tunnel-path-steps</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="dimension">
+                  <ogc:Function name="geometry"/>
+                </ogc:Function>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>path</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>subclass</ogc:PropertyName>
+                <ogc:Literal>steps</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#FFFFFF</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">bevel</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>13.5</ogc:Literal>
+                  <ogc:Literal>0</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                  <ogc:Literal>1.25</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>5.75</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>13.5</ogc:Literal>
+                    <ogc:Literal>0</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>1.25</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>5.75</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>0.25</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>13.5</ogc:Literal>
+                    <ogc:Literal>0</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>1.25</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>5.75</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>tunnel-path</sld:Name>
         <sld:Title>MBStyle tunnel-path</sld:Title>
         <sld:Abstract>Generated for transportation</sld:Abstract>
@@ -1188,16 +2025,18 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>brunnel</ogc:PropertyName>
-                  <ogc:Literal>tunnel</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>path</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>path</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>subclass</ogc:PropertyName>
+                <ogc:Literal>steps</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -1259,6 +2098,57 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
+        <sld:Name>tunnel-motorway-link</sld:Name>
+        <sld:Title>MBStyle tunnel-motorway-link</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>tunnel-motorway-link</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>motorway</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#F4D19E</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>12.5</ogc:Literal>
+                  <ogc:Literal>0</ogc:Literal>
+                  <ogc:Literal>13</ogc:Literal>
+                  <ogc:Literal>1.5</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                  <ogc:Literal>2.5</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>11.5</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>tunnel-service-track</sld:Name>
         <sld:Title>MBStyle tunnel-service-track</sld:Title>
         <sld:Abstract>Generated for transportation</sld:Abstract>
@@ -1308,6 +2198,63 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
+        <sld:Name>tunnel-link</sld:Name>
+        <sld:Title>MBStyle tunnel-link</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>tunnel-link</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>trunk</ogc:Literal>
+                  <ogc:Literal>primary</ogc:Literal>
+                  <ogc:Literal>secondary</ogc:Literal>
+                  <ogc:Literal>tertiary</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#FFF4C6</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>12.5</ogc:Literal>
+                  <ogc:Literal>0</ogc:Literal>
+                  <ogc:Literal>13</ogc:Literal>
+                  <ogc:Literal>1.5</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                  <ogc:Literal>2.5</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>11.5</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>tunnel-minor</sld:Name>
         <sld:Title>MBStyle tunnel-minor</sld:Title>
         <sld:Abstract>Generated for transportation</sld:Abstract>
@@ -1322,7 +2269,7 @@
               </ogc:PropertyIsEqualTo>
               <ogc:PropertyIsEqualTo>
                 <ogc:PropertyName>class</ogc:PropertyName>
-                <ogc:Literal>minor_road</ogc:Literal>
+                <ogc:Literal>minor</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -1373,6 +2320,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -1422,6 +2373,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -1467,6 +2422,10 @@
                 <ogc:PropertyName>class</ogc:PropertyName>
                 <ogc:Literal>motorway</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -2053,6 +3012,85 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
+        <sld:Name>highway-path-steps-casing</sld:Name>
+        <sld:Title>MBStyle highway-path-steps-casing</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>highway-path-steps-casing</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="dimension">
+                  <ogc:Function name="geometry"/>
+                </ogc:Function>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>brunnel</ogc:PropertyName>
+                  <ogc:Literal>bridge</ogc:Literal>
+                  <ogc:Literal>tunnel</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>path</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>subclass</ogc:PropertyName>
+                  <ogc:Literal>steps</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#CFCDCA</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-opacity">
+                <ogc:Function name="Interpolate">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>12</ogc:Literal>
+                  <ogc:Literal>0</ogc:Literal>
+                  <ogc:Literal>12.5</ogc:Literal>
+                  <ogc:Literal>1</ogc:Literal>
+                  <ogc:Literal>numeric</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>12</ogc:Literal>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Literal>13</ogc:Literal>
+                  <ogc:Literal>1</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                  <ogc:Literal>2</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>9.25</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>highway-motorway-link-casing</sld:Name>
         <sld:Title>MBStyle highway-motorway-link-casing</sld:Title>
         <sld:Abstract>Generated for transportation</sld:Abstract>
@@ -2071,7 +3109,11 @@
               </ogc:PropertyIsEqualTo>
               <ogc:PropertyIsEqualTo>
                 <ogc:PropertyName>class</ogc:PropertyName>
-                <ogc:Literal>motorway_link</ogc:Literal>
+                <ogc:Literal>motorway</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -2125,12 +3167,16 @@
               <ogc:PropertyIsEqualTo>
                 <ogc:Function name="in">
                   <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>primary_link</ogc:Literal>
-                  <ogc:Literal>secondary_link</ogc:Literal>
-                  <ogc:Literal>tertiary_link</ogc:Literal>
-                  <ogc:Literal>trunk_link</ogc:Literal>
+                  <ogc:Literal>trunk</ogc:Literal>
+                  <ogc:Literal>primary</ogc:Literal>
+                  <ogc:Literal>secondary</ogc:Literal>
+                  <ogc:Literal>tertiary</ogc:Literal>
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -2179,21 +3225,19 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsNotEqualTo>
-                  <ogc:PropertyName>brunnel</ogc:PropertyName>
-                  <ogc:Literal>tunnel</ogc:Literal>
-                </ogc:PropertyIsNotEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>class</ogc:PropertyName>
-                    <ogc:Literal>minor</ogc:Literal>
-                    <ogc:Literal>service</ogc:Literal>
-                    <ogc:Literal>track</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>true</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>minor</ogc:Literal>
+                  <ogc:Literal>service</ogc:Literal>
+                  <ogc:Literal>track</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -2265,6 +3309,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -2315,6 +3363,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:MaxScaleDenominator>8735660.374232702</sld:MaxScaleDenominator>
@@ -2385,6 +3437,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:MaxScaleDenominator>8735660.374232702</sld:MaxScaleDenominator>
@@ -2452,6 +3508,10 @@
                 <ogc:PropertyName>class</ogc:PropertyName>
                 <ogc:Literal>motorway</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:MaxScaleDenominator>1.7471320748465404E7</sld:MaxScaleDenominator>
@@ -2515,20 +3575,22 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>brunnel</ogc:PropertyName>
-                    <ogc:Literal>bridge</ogc:Literal>
-                    <ogc:Literal>tunnel</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>false</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>path</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>brunnel</ogc:PropertyName>
+                  <ogc:Literal>bridge</ogc:Literal>
+                  <ogc:Literal>tunnel</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>path</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>subclass</ogc:PropertyName>
+                <ogc:Literal>steps</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -2590,6 +3652,103 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
+        <sld:Name>highway-path-steps</sld:Name>
+        <sld:Title>MBStyle highway-path-steps</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>highway-path-steps</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="dimension">
+                  <ogc:Function name="geometry"/>
+                </ogc:Function>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>brunnel</ogc:PropertyName>
+                  <ogc:Literal>bridge</ogc:Literal>
+                  <ogc:Literal>tunnel</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>path</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>subclass</ogc:PropertyName>
+                <ogc:Literal>steps</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#FFFFFF</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">bevel</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>13.5</ogc:Literal>
+                  <ogc:Literal>0</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                  <ogc:Literal>1.25</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>5.75</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>13.5</ogc:Literal>
+                    <ogc:Literal>0</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>1.25</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>5.75</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>0.25</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>13.5</ogc:Literal>
+                    <ogc:Literal>0</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>1.25</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>5.75</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>highway-motorway-link</sld:Name>
         <sld:Title>MBStyle highway-motorway-link</sld:Title>
         <sld:Abstract>Generated for transportation</sld:Abstract>
@@ -2608,7 +3767,11 @@
               </ogc:PropertyIsEqualTo>
               <ogc:PropertyIsEqualTo>
                 <ogc:PropertyName>class</ogc:PropertyName>
-                <ogc:Literal>motorway_link</ogc:Literal>
+                <ogc:Literal>motorway</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -2662,12 +3825,16 @@
               <ogc:PropertyIsEqualTo>
                 <ogc:Function name="in">
                   <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>primary_link</ogc:Literal>
-                  <ogc:Literal>secondary_link</ogc:Literal>
-                  <ogc:Literal>tertiary_link</ogc:Literal>
-                  <ogc:Literal>trunk_link</ogc:Literal>
+                  <ogc:Literal>trunk</ogc:Literal>
+                  <ogc:Literal>primary</ogc:Literal>
+                  <ogc:Literal>secondary</ogc:Literal>
+                  <ogc:Literal>tertiary</ogc:Literal>
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -2716,21 +3883,19 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsNotEqualTo>
-                  <ogc:PropertyName>brunnel</ogc:PropertyName>
-                  <ogc:Literal>tunnel</ogc:Literal>
-                </ogc:PropertyIsNotEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>class</ogc:PropertyName>
-                    <ogc:Literal>minor</ogc:Literal>
-                    <ogc:Literal>service</ogc:Literal>
-                    <ogc:Literal>track</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>true</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>minor</ogc:Literal>
+                  <ogc:Literal>service</ogc:Literal>
+                  <ogc:Literal>track</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -2785,6 +3950,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -2829,23 +3998,25 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>brunnel</ogc:PropertyName>
-                    <ogc:Literal>bridge</ogc:Literal>
-                    <ogc:Literal>tunnel</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>false</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>class</ogc:PropertyName>
-                    <ogc:Literal>primary</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>true</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>brunnel</ogc:PropertyName>
+                  <ogc:Literal>bridge</ogc:Literal>
+                  <ogc:Literal>tunnel</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>primary</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -2890,23 +4061,25 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>brunnel</ogc:PropertyName>
-                    <ogc:Literal>bridge</ogc:Literal>
-                    <ogc:Literal>tunnel</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>false</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>class</ogc:PropertyName>
-                    <ogc:Literal>trunk</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>true</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>brunnel</ogc:PropertyName>
+                  <ogc:Literal>bridge</ogc:Literal>
+                  <ogc:Literal>tunnel</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>trunk</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -2951,20 +4124,22 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>brunnel</ogc:PropertyName>
-                    <ogc:Literal>bridge</ogc:Literal>
-                    <ogc:Literal>tunnel</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>false</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>motorway</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>brunnel</ogc:PropertyName>
+                  <ogc:Literal>bridge</ogc:Literal>
+                  <ogc:Literal>tunnel</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>motorway</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:MaxScaleDenominator>8735660.374232702</sld:MaxScaleDenominator>
@@ -3010,19 +4185,17 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>transit</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>brunnel</ogc:PropertyName>
-                    <ogc:Literal>tunnel</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>false</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>transit</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>brunnel</ogc:PropertyName>
+                  <ogc:Literal>tunnel</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -3064,19 +4237,17 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>transit</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>brunnel</ogc:PropertyName>
-                    <ogc:Literal>tunnel</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>false</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>transit</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>brunnel</ogc:PropertyName>
+                  <ogc:Literal>tunnel</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -3158,17 +4329,15 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>rail</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:Not>
-                  <ogc:PropertyIsNull>
-                    <ogc:PropertyName>service</ogc:PropertyName>
-                  </ogc:PropertyIsNull>
-                </ogc:Not>
-              </ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>rail</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>service</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -3210,17 +4379,15 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>rail</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:Not>
-                  <ogc:PropertyIsNull>
-                    <ogc:PropertyName>service</ogc:PropertyName>
-                  </ogc:PropertyIsNull>
-                </ogc:Not>
-              </ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>rail</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>service</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -3302,23 +4469,21 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsNull>
-                  <ogc:PropertyName>service</ogc:PropertyName>
-                </ogc:PropertyIsNull>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>brunnel</ogc:PropertyName>
-                    <ogc:Literal>bridge</ogc:Literal>
-                    <ogc:Literal>tunnel</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>false</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>rail</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsNull>
+                <ogc:PropertyName>service</ogc:PropertyName>
+              </ogc:PropertyIsNull>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>brunnel</ogc:PropertyName>
+                  <ogc:Literal>bridge</ogc:Literal>
+                  <ogc:Literal>tunnel</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>rail</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -3362,23 +4527,21 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsNull>
-                  <ogc:PropertyName>service</ogc:PropertyName>
-                </ogc:PropertyIsNull>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="in">
-                    <ogc:PropertyName>brunnel</ogc:PropertyName>
-                    <ogc:Literal>bridge</ogc:Literal>
-                    <ogc:Literal>tunnel</ogc:Literal>
-                  </ogc:Function>
-                  <ogc:Literal>false</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>rail</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsNull>
+                <ogc:PropertyName>service</ogc:PropertyName>
+              </ogc:PropertyIsNull>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>brunnel</ogc:PropertyName>
+                  <ogc:Literal>bridge</ogc:Literal>
+                  <ogc:Literal>tunnel</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>false</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>rail</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -3460,7 +4623,11 @@
               </ogc:PropertyIsEqualTo>
               <ogc:PropertyIsEqualTo>
                 <ogc:PropertyName>class</ogc:PropertyName>
-                <ogc:Literal>motorway_link</ogc:Literal>
+                <ogc:Literal>motorway</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -3484,7 +4651,7 @@
                   <ogc:Literal>14</ogc:Literal>
                   <ogc:Literal>4</ogc:Literal>
                   <ogc:Literal>20</ogc:Literal>
-                  <ogc:Literal>15</ogc:Literal>
+                  <ogc:Literal>19</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
             </sld:Stroke>
@@ -3508,12 +4675,16 @@
               <ogc:PropertyIsEqualTo>
                 <ogc:Function name="in">
                   <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>primary_link</ogc:Literal>
-                  <ogc:Literal>secondary_link</ogc:Literal>
-                  <ogc:Literal>tertiary_link</ogc:Literal>
-                  <ogc:Literal>trunk_link</ogc:Literal>
+                  <ogc:Literal>trunk</ogc:Literal>
+                  <ogc:Literal>primary</ogc:Literal>
+                  <ogc:Literal>secondary</ogc:Literal>
+                  <ogc:Literal>tertiary</ogc:Literal>
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -3537,7 +4708,7 @@
                   <ogc:Literal>14</ogc:Literal>
                   <ogc:Literal>4</ogc:Literal>
                   <ogc:Literal>20</ogc:Literal>
-                  <ogc:Literal>15</ogc:Literal>
+                  <ogc:Literal>19</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
             </sld:Stroke>
@@ -3566,6 +4737,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -3581,10 +4756,14 @@
                     <ogc:Literal>EPSG:3857</ogc:Literal>
                   </ogc:Function>
                   <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>5</ogc:Literal>
+                  <ogc:Literal>0.4</ogc:Literal>
+                  <ogc:Literal>7</ogc:Literal>
+                  <ogc:Literal>0.6</ogc:Literal>
                   <ogc:Literal>8</ogc:Literal>
                   <ogc:Literal>1.5</ogc:Literal>
                   <ogc:Literal>20</ogc:Literal>
-                  <ogc:Literal>28</ogc:Literal>
+                  <ogc:Literal>21</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
             </sld:Stroke>
@@ -3613,6 +4792,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -3660,6 +4843,10 @@
                 <ogc:PropertyName>class</ogc:PropertyName>
                 <ogc:Literal>motorway</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -3682,7 +4869,80 @@
                   <ogc:Literal>7</ogc:Literal>
                   <ogc:Literal>1.5</ogc:Literal>
                   <ogc:Literal>20</ogc:Literal>
-                  <ogc:Literal>22</ogc:Literal>
+                  <ogc:Literal>26</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>bridge-minor-casing</sld:Name>
+        <sld:Title>MBStyle bridge-minor-casing</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>bridge-minor-casing</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="dimension">
+                  <ogc:Function name="geometry"/>
+                </ogc:Function>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>bridge</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>minor</ogc:Literal>
+                  <ogc:Literal>service</ogc:Literal>
+                  <ogc:Literal>track</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#CFCDCA</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-opacity">
+                <ogc:Function name="Interpolate">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>12</ogc:Literal>
+                  <ogc:Literal>0</ogc:Literal>
+                  <ogc:Literal>12.5</ogc:Literal>
+                  <ogc:Literal>1</ogc:Literal>
+                  <ogc:Literal>numeric</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>12</ogc:Literal>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Literal>13</ogc:Literal>
+                  <ogc:Literal>1</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                  <ogc:Literal>6</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>24</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
             </sld:Stroke>
@@ -3705,21 +4965,19 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>brunnel</ogc:PropertyName>
-                  <ogc:Literal>bridge</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>path</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>bridge</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>path</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Stroke>
-              <sld:CssParameter name="stroke">#F8F4F0</sld:CssParameter>
+              <sld:CssParameter name="stroke">#CFCDCA</sld:CssParameter>
               <sld:CssParameter name="stroke-linejoin">mitre</sld:CssParameter>
               <sld:CssParameter name="stroke-width">
                 <ogc:Function name="Exponential">
@@ -3742,6 +5000,99 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
+        <sld:Name>bridge-path-steps</sld:Name>
+        <sld:Title>MBStyle bridge-path-steps</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>bridge-path-steps</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="dimension">
+                  <ogc:Function name="geometry"/>
+                </ogc:Function>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>bridge</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>path</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>subclass</ogc:PropertyName>
+                <ogc:Literal>steps</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#FFFFFF</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>13.5</ogc:Literal>
+                  <ogc:Literal>0</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                  <ogc:Literal>1.25</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>5.75</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="stroke-dasharray">
+                <ogc:Mul>
+                  <ogc:Literal>0.5</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>13.5</ogc:Literal>
+                    <ogc:Literal>0</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>1.25</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>5.75</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+                <ogc:Mul>
+                  <ogc:Literal>0.25</ogc:Literal>
+                  <ogc:Function name="Exponential">
+                    <ogc:Function name="zoomLevel">
+                      <ogc:Function name="env">
+                        <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>EPSG:3857</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>1.2</ogc:Literal>
+                    <ogc:Literal>13.5</ogc:Literal>
+                    <ogc:Literal>0</ogc:Literal>
+                    <ogc:Literal>14</ogc:Literal>
+                    <ogc:Literal>1.25</ogc:Literal>
+                    <ogc:Literal>20</ogc:Literal>
+                    <ogc:Literal>5.75</ogc:Literal>
+                  </ogc:Function>
+                </ogc:Mul>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>bridge-path</sld:Name>
         <sld:Title>MBStyle bridge-path</sld:Title>
         <sld:Abstract>Generated for transportation</sld:Abstract>
@@ -3756,16 +5107,18 @@
                 </ogc:Function>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
-              <ogc:And>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>brunnel</ogc:PropertyName>
-                  <ogc:Literal>bridge</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-                <ogc:PropertyIsEqualTo>
-                  <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>path</ogc:Literal>
-                </ogc:PropertyIsEqualTo>
-              </ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>bridge</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>path</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>subclass</ogc:PropertyName>
+                <ogc:Literal>steps</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -3841,7 +5194,11 @@
               </ogc:PropertyIsEqualTo>
               <ogc:PropertyIsEqualTo>
                 <ogc:PropertyName>class</ogc:PropertyName>
-                <ogc:Literal>motorway_link</ogc:Literal>
+                <ogc:Literal>motorway</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -3889,12 +5246,16 @@
               <ogc:PropertyIsEqualTo>
                 <ogc:Function name="in">
                   <ogc:PropertyName>class</ogc:PropertyName>
-                  <ogc:Literal>primary_link</ogc:Literal>
-                  <ogc:Literal>secondary_link</ogc:Literal>
-                  <ogc:Literal>tertiary_link</ogc:Literal>
-                  <ogc:Literal>trunk_link</ogc:Literal>
+                  <ogc:Literal>trunk</ogc:Literal>
+                  <ogc:Literal>primary</ogc:Literal>
+                  <ogc:Literal>secondary</ogc:Literal>
+                  <ogc:Literal>tertiary</ogc:Literal>
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
@@ -3927,6 +5288,63 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
+        <sld:Name>bridge-minor</sld:Name>
+        <sld:Title>MBStyle bridge-minor</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>bridge-minor</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="dimension">
+                  <ogc:Function name="geometry"/>
+                </ogc:Function>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>bridge</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="in">
+                  <ogc:PropertyName>class</ogc:PropertyName>
+                  <ogc:Literal>minor</ogc:Literal>
+                  <ogc:Literal>service</ogc:Literal>
+                  <ogc:Literal>track</ogc:Literal>
+                </ogc:Function>
+                <ogc:Literal>true</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#FFFFFF</sld:CssParameter>
+              <sld:CssParameter name="stroke-linecap">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>13.5</ogc:Literal>
+                  <ogc:Literal>0</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                  <ogc:Literal>2.5</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>11.5</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>bridge-secondary-tertiary</sld:Name>
         <sld:Title>MBStyle bridge-secondary-tertiary</sld:Title>
         <sld:Abstract>Generated for transportation</sld:Abstract>
@@ -3947,6 +5365,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -3964,10 +5386,10 @@
                   <ogc:Literal>1.2</ogc:Literal>
                   <ogc:Literal>6.5</ogc:Literal>
                   <ogc:Literal>0</ogc:Literal>
-                  <ogc:Literal>7</ogc:Literal>
+                  <ogc:Literal>8</ogc:Literal>
                   <ogc:Literal>0.5</ogc:Literal>
                   <ogc:Literal>20</ogc:Literal>
-                  <ogc:Literal>20</ogc:Literal>
+                  <ogc:Literal>13</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
             </sld:Stroke>
@@ -3996,6 +5418,10 @@
                 </ogc:Function>
                 <ogc:Literal>true</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -4041,6 +5467,10 @@
                 <ogc:PropertyName>class</ogc:PropertyName>
                 <ogc:Literal>motorway</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>ramp</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -4206,7 +5636,7 @@
           <sld:Name>cablecar</sld:Name>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>class</ogc:PropertyName>
+              <ogc:PropertyName>subclass</ogc:PropertyName>
               <ogc:Literal>cable_car</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -4245,7 +5675,7 @@
           <sld:Name>cablecar-dash</sld:Name>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>class</ogc:PropertyName>
+              <ogc:PropertyName>subclass</ogc:PropertyName>
               <ogc:Literal>cable_car</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -4326,7 +5756,7 @@
             <ogc:And>
               <ogc:PropertyIsGreaterThanOrEqualTo>
                 <ogc:PropertyName>admin_level</ogc:PropertyName>
-                <ogc:Literal>4</ogc:Literal>
+                <ogc:Literal>3</ogc:Literal>
               </ogc:PropertyIsGreaterThanOrEqualTo>
               <ogc:PropertyIsLessThanOrEqualTo>
                 <ogc:PropertyName>admin_level</ogc:PropertyName>
@@ -4338,6 +5768,7 @@
               </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
+          <sld:MaxScaleDenominator>6.988528299386162E7</sld:MaxScaleDenominator>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Stroke>
               <sld:CssParameter name="stroke">#9E9CAB</sld:CssParameter>
@@ -4603,6 +6034,7 @@
               </ogc:PropertyIsEqualTo>
             </ogc:And>
           </ogc:Filter>
+          <sld:MaxScaleDenominator>1.7471320748465404E7</sld:MaxScaleDenominator>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Stroke>
               <sld:CssParameter name="stroke">#9ABDD6</sld:CssParameter>
@@ -4678,7 +6110,8 @@
           <sld:MaxScaleDenominator>34123.67333684649</sld:MaxScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[ ]]>
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[ ]]>
               <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
             </sld:Label>
             <sld:Font>
@@ -4752,7 +6185,8 @@
           </ogc:Filter>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[
 ]]>
               <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
             </sld:Label>
@@ -4893,7 +6327,8 @@
           </ogc:Filter>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[
 ]]>
               <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
             </sld:Label>
@@ -4952,478 +6387,6 @@
     </sld:UserStyle>
   </sld:NamedLayer>
   <sld:NamedLayer>
-    <sld:Name>poi</sld:Name>
-    <sld:UserStyle>
-      <sld:Name>Default Styler</sld:Name>
-      <sld:FeatureTypeStyle>
-        <sld:Name>poi-level-3</sld:Name>
-        <sld:Title>MBStyle poi-level-3</sld:Title>
-        <sld:Abstract>Generated for poi</sld:Abstract>
-        <sld:SemanticTypeIdentifier>POINT</sld:SemanticTypeIdentifier>
-        <sld:Rule>
-          <sld:Name>poi-level-3</sld:Name>
-          <ogc:Filter>
-            <ogc:And>
-              <ogc:PropertyIsEqualTo>
-                <ogc:Function name="dimension">
-                  <ogc:Function name="geometry"/>
-                </ogc:Function>
-                <ogc:Literal>0</ogc:Literal>
-              </ogc:PropertyIsEqualTo>
-              <ogc:PropertyIsGreaterThanOrEqualTo>
-                <ogc:PropertyName>rank</ogc:PropertyName>
-                <ogc:Literal>25</ogc:Literal>
-              </ogc:PropertyIsGreaterThanOrEqualTo>
-            </ogc:And>
-          </ogc:Filter>
-          <sld:MaxScaleDenominator>4265.4591671058115</sld:MaxScaleDenominator>
-          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
-            <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
-]]>
-              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
-            </sld:Label>
-            <sld:Font>
-              <sld:CssParameter name="font-family">
-                <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Noto Sans</ogc:Literal>
-                </ogc:Function>
-              </sld:CssParameter>
-              <sld:CssParameter name="font-size">12</sld:CssParameter>
-              <sld:CssParameter name="font-style">normal</sld:CssParameter>
-              <sld:CssParameter name="font-weight">normal</sld:CssParameter>
-            </sld:Font>
-            <sld:LabelPlacement>
-              <sld:PointPlacement>
-                <sld:AnchorPoint>
-                  <sld:AnchorPointX>0.5</sld:AnchorPointX>
-                  <sld:AnchorPointY>1.0</sld:AnchorPointY>
-                </sld:AnchorPoint>
-                <sld:Displacement>
-                  <sld:DisplacementX>
-                    <ogc:Mul>
-                      <ogc:Literal>12</ogc:Literal>
-                      <ogc:Literal>0</ogc:Literal>
-                    </ogc:Mul>
-                  </sld:DisplacementX>
-                  <sld:DisplacementY>
-                    <ogc:Mul>
-                      <ogc:Literal>12</ogc:Literal>
-                      <ogc:Mul>
-                        <ogc:Literal>-1</ogc:Literal>
-                        <ogc:Literal>0.6</ogc:Literal>
-                      </ogc:Mul>
-                    </ogc:Mul>
-                  </sld:DisplacementY>
-                </sld:Displacement>
-              </sld:PointPlacement>
-            </sld:LabelPlacement>
-            <sld:Halo>
-              <sld:Radius>1</sld:Radius>
-              <sld:Fill>
-                <sld:CssParameter name="fill">#FFFFFF</sld:CssParameter>
-              </sld:Fill>
-            </sld:Halo>
-            <sld:Fill>
-              <sld:CssParameter name="fill">#666666</sld:CssParameter>
-            </sld:Fill>
-            <sld:Graphic>
-              <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(class,'_11'))}&amp;size=${strURLEncode(1.0)}"/>
-                <sld:Format>mbsprite</sld:Format>
-              </sld:ExternalGraphic>
-              <sld:AnchorPoint>
-                <sld:AnchorPointX>0.5</sld:AnchorPointX>
-                <sld:AnchorPointY>0.5</sld:AnchorPointY>
-              </sld:AnchorPoint>
-              <sld:Displacement>
-                <sld:DisplacementX>
-                  <ogc:Mul>
-                    <ogc:Literal>1.0</ogc:Literal>
-                    <ogc:Literal>0</ogc:Literal>
-                  </ogc:Mul>
-                </sld:DisplacementX>
-                <sld:DisplacementY>
-                  <ogc:Mul>
-                    <ogc:Literal>1.0</ogc:Literal>
-                    <ogc:Mul>
-                      <ogc:Literal>-1</ogc:Literal>
-                      <ogc:Literal>0</ogc:Literal>
-                    </ogc:Mul>
-                  </ogc:Mul>
-                </sld:DisplacementY>
-              </sld:Displacement>
-            </sld:Graphic>
-            <sld:Priority>5000</sld:Priority>
-            <sld:VendorOption name="repeat">250</sld:VendorOption>
-            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
-            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
-            <sld:VendorOption name="partials">false</sld:VendorOption>
-            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
-            <sld:VendorOption name="spaceAround">2</sld:VendorOption>
-            <sld:VendorOption name="autoWrap">108.0</sld:VendorOption>
-            <sld:VendorOption name="graphicPlacement">INDEPENDENT</sld:VendorOption>
-            <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
-          </sld:TextSymbolizer>
-        </sld:Rule>
-      </sld:FeatureTypeStyle>
-      <sld:FeatureTypeStyle>
-        <sld:Name>poi-level-2</sld:Name>
-        <sld:Title>MBStyle poi-level-2</sld:Title>
-        <sld:Abstract>Generated for poi</sld:Abstract>
-        <sld:SemanticTypeIdentifier>POINT</sld:SemanticTypeIdentifier>
-        <sld:Rule>
-          <sld:Name>poi-level-2</sld:Name>
-          <ogc:Filter>
-            <ogc:And>
-              <ogc:PropertyIsEqualTo>
-                <ogc:Function name="dimension">
-                  <ogc:Function name="geometry"/>
-                </ogc:Function>
-                <ogc:Literal>0</ogc:Literal>
-              </ogc:PropertyIsEqualTo>
-              <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>rank</ogc:PropertyName>
-                <ogc:Literal>24</ogc:Literal>
-              </ogc:PropertyIsLessThanOrEqualTo>
-              <ogc:PropertyIsGreaterThanOrEqualTo>
-                <ogc:PropertyName>rank</ogc:PropertyName>
-                <ogc:Literal>15</ogc:Literal>
-              </ogc:PropertyIsGreaterThanOrEqualTo>
-            </ogc:And>
-          </ogc:Filter>
-          <sld:MaxScaleDenominator>8530.918334211623</sld:MaxScaleDenominator>
-          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
-            <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
-]]>
-              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
-            </sld:Label>
-            <sld:Font>
-              <sld:CssParameter name="font-family">
-                <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Noto Sans</ogc:Literal>
-                </ogc:Function>
-              </sld:CssParameter>
-              <sld:CssParameter name="font-size">12</sld:CssParameter>
-              <sld:CssParameter name="font-style">normal</sld:CssParameter>
-              <sld:CssParameter name="font-weight">normal</sld:CssParameter>
-            </sld:Font>
-            <sld:LabelPlacement>
-              <sld:PointPlacement>
-                <sld:AnchorPoint>
-                  <sld:AnchorPointX>0.5</sld:AnchorPointX>
-                  <sld:AnchorPointY>1.0</sld:AnchorPointY>
-                </sld:AnchorPoint>
-                <sld:Displacement>
-                  <sld:DisplacementX>
-                    <ogc:Mul>
-                      <ogc:Literal>12</ogc:Literal>
-                      <ogc:Literal>0</ogc:Literal>
-                    </ogc:Mul>
-                  </sld:DisplacementX>
-                  <sld:DisplacementY>
-                    <ogc:Mul>
-                      <ogc:Literal>12</ogc:Literal>
-                      <ogc:Mul>
-                        <ogc:Literal>-1</ogc:Literal>
-                        <ogc:Literal>0.6</ogc:Literal>
-                      </ogc:Mul>
-                    </ogc:Mul>
-                  </sld:DisplacementY>
-                </sld:Displacement>
-              </sld:PointPlacement>
-            </sld:LabelPlacement>
-            <sld:Halo>
-              <sld:Radius>1</sld:Radius>
-              <sld:Fill>
-                <sld:CssParameter name="fill">#FFFFFF</sld:CssParameter>
-              </sld:Fill>
-            </sld:Halo>
-            <sld:Fill>
-              <sld:CssParameter name="fill">#666666</sld:CssParameter>
-            </sld:Fill>
-            <sld:Graphic>
-              <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(class,'_11'))}&amp;size=${strURLEncode(1.0)}"/>
-                <sld:Format>mbsprite</sld:Format>
-              </sld:ExternalGraphic>
-              <sld:AnchorPoint>
-                <sld:AnchorPointX>0.5</sld:AnchorPointX>
-                <sld:AnchorPointY>0.5</sld:AnchorPointY>
-              </sld:AnchorPoint>
-              <sld:Displacement>
-                <sld:DisplacementX>
-                  <ogc:Mul>
-                    <ogc:Literal>1.0</ogc:Literal>
-                    <ogc:Literal>0</ogc:Literal>
-                  </ogc:Mul>
-                </sld:DisplacementX>
-                <sld:DisplacementY>
-                  <ogc:Mul>
-                    <ogc:Literal>1.0</ogc:Literal>
-                    <ogc:Mul>
-                      <ogc:Literal>-1</ogc:Literal>
-                      <ogc:Literal>0</ogc:Literal>
-                    </ogc:Mul>
-                  </ogc:Mul>
-                </sld:DisplacementY>
-              </sld:Displacement>
-            </sld:Graphic>
-            <sld:Priority>6000</sld:Priority>
-            <sld:VendorOption name="repeat">250</sld:VendorOption>
-            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
-            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
-            <sld:VendorOption name="partials">false</sld:VendorOption>
-            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
-            <sld:VendorOption name="spaceAround">2</sld:VendorOption>
-            <sld:VendorOption name="autoWrap">108.0</sld:VendorOption>
-            <sld:VendorOption name="graphicPlacement">INDEPENDENT</sld:VendorOption>
-            <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
-          </sld:TextSymbolizer>
-        </sld:Rule>
-      </sld:FeatureTypeStyle>
-      <sld:FeatureTypeStyle>
-        <sld:Name>poi-level-1</sld:Name>
-        <sld:Title>MBStyle poi-level-1</sld:Title>
-        <sld:Abstract>Generated for poi</sld:Abstract>
-        <sld:SemanticTypeIdentifier>POINT</sld:SemanticTypeIdentifier>
-        <sld:Rule>
-          <sld:Name>poi-level-1</sld:Name>
-          <ogc:Filter>
-            <ogc:And>
-              <ogc:PropertyIsEqualTo>
-                <ogc:Function name="dimension">
-                  <ogc:Function name="geometry"/>
-                </ogc:Function>
-                <ogc:Literal>0</ogc:Literal>
-              </ogc:PropertyIsEqualTo>
-              <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>rank</ogc:PropertyName>
-                <ogc:Literal>14</ogc:Literal>
-              </ogc:PropertyIsLessThanOrEqualTo>
-              <ogc:Not>
-                <ogc:PropertyIsNull>
-                  <ogc:PropertyName>name</ogc:PropertyName>
-                </ogc:PropertyIsNull>
-              </ogc:Not>
-            </ogc:And>
-          </ogc:Filter>
-          <sld:MaxScaleDenominator>17061.836668423246</sld:MaxScaleDenominator>
-          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
-            <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
-]]>
-              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
-            </sld:Label>
-            <sld:Font>
-              <sld:CssParameter name="font-family">
-                <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Noto Sans</ogc:Literal>
-                </ogc:Function>
-              </sld:CssParameter>
-              <sld:CssParameter name="font-size">12</sld:CssParameter>
-              <sld:CssParameter name="font-style">normal</sld:CssParameter>
-              <sld:CssParameter name="font-weight">normal</sld:CssParameter>
-            </sld:Font>
-            <sld:LabelPlacement>
-              <sld:PointPlacement>
-                <sld:AnchorPoint>
-                  <sld:AnchorPointX>0.5</sld:AnchorPointX>
-                  <sld:AnchorPointY>1.0</sld:AnchorPointY>
-                </sld:AnchorPoint>
-                <sld:Displacement>
-                  <sld:DisplacementX>
-                    <ogc:Mul>
-                      <ogc:Literal>12</ogc:Literal>
-                      <ogc:Literal>0</ogc:Literal>
-                    </ogc:Mul>
-                  </sld:DisplacementX>
-                  <sld:DisplacementY>
-                    <ogc:Mul>
-                      <ogc:Literal>12</ogc:Literal>
-                      <ogc:Mul>
-                        <ogc:Literal>-1</ogc:Literal>
-                        <ogc:Literal>0.6</ogc:Literal>
-                      </ogc:Mul>
-                    </ogc:Mul>
-                  </sld:DisplacementY>
-                </sld:Displacement>
-              </sld:PointPlacement>
-            </sld:LabelPlacement>
-            <sld:Halo>
-              <sld:Radius>1</sld:Radius>
-              <sld:Fill>
-                <sld:CssParameter name="fill">#FFFFFF</sld:CssParameter>
-              </sld:Fill>
-            </sld:Halo>
-            <sld:Fill>
-              <sld:CssParameter name="fill">#666666</sld:CssParameter>
-            </sld:Fill>
-            <sld:Graphic>
-              <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(class,'_11'))}&amp;size=${strURLEncode(1.0)}"/>
-                <sld:Format>mbsprite</sld:Format>
-              </sld:ExternalGraphic>
-              <sld:AnchorPoint>
-                <sld:AnchorPointX>0.5</sld:AnchorPointX>
-                <sld:AnchorPointY>0.5</sld:AnchorPointY>
-              </sld:AnchorPoint>
-              <sld:Displacement>
-                <sld:DisplacementX>
-                  <ogc:Mul>
-                    <ogc:Literal>1.0</ogc:Literal>
-                    <ogc:Literal>0</ogc:Literal>
-                  </ogc:Mul>
-                </sld:DisplacementX>
-                <sld:DisplacementY>
-                  <ogc:Mul>
-                    <ogc:Literal>1.0</ogc:Literal>
-                    <ogc:Mul>
-                      <ogc:Literal>-1</ogc:Literal>
-                      <ogc:Literal>0</ogc:Literal>
-                    </ogc:Mul>
-                  </ogc:Mul>
-                </sld:DisplacementY>
-              </sld:Displacement>
-            </sld:Graphic>
-            <sld:Priority>7000</sld:Priority>
-            <sld:VendorOption name="repeat">250</sld:VendorOption>
-            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
-            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
-            <sld:VendorOption name="partials">false</sld:VendorOption>
-            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
-            <sld:VendorOption name="spaceAround">2</sld:VendorOption>
-            <sld:VendorOption name="autoWrap">108.0</sld:VendorOption>
-            <sld:VendorOption name="graphicPlacement">INDEPENDENT</sld:VendorOption>
-            <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
-          </sld:TextSymbolizer>
-        </sld:Rule>
-      </sld:FeatureTypeStyle>
-      <sld:FeatureTypeStyle>
-        <sld:Name>poi-railway</sld:Name>
-        <sld:Title>MBStyle poi-railway</sld:Title>
-        <sld:Abstract>Generated for poi</sld:Abstract>
-        <sld:SemanticTypeIdentifier>POINT</sld:SemanticTypeIdentifier>
-        <sld:Rule>
-          <sld:Name>poi-railway</sld:Name>
-          <ogc:Filter>
-            <ogc:And>
-              <ogc:PropertyIsEqualTo>
-                <ogc:Function name="dimension">
-                  <ogc:Function name="geometry"/>
-                </ogc:Function>
-                <ogc:Literal>0</ogc:Literal>
-              </ogc:PropertyIsEqualTo>
-              <ogc:Not>
-                <ogc:PropertyIsNull>
-                  <ogc:PropertyName>name</ogc:PropertyName>
-                </ogc:PropertyIsNull>
-              </ogc:Not>
-              <ogc:PropertyIsEqualTo>
-                <ogc:PropertyName>class</ogc:PropertyName>
-                <ogc:Literal>railway</ogc:Literal>
-              </ogc:PropertyIsEqualTo>
-              <ogc:PropertyIsEqualTo>
-                <ogc:PropertyName>subclass</ogc:PropertyName>
-                <ogc:Literal>station</ogc:Literal>
-              </ogc:PropertyIsEqualTo>
-            </ogc:And>
-          </ogc:Filter>
-          <sld:MaxScaleDenominator>34123.67333684649</sld:MaxScaleDenominator>
-          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
-            <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
-]]>
-              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
-            </sld:Label>
-            <sld:Font>
-              <sld:CssParameter name="font-family">
-                <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Noto Sans</ogc:Literal>
-                </ogc:Function>
-              </sld:CssParameter>
-              <sld:CssParameter name="font-size">12</sld:CssParameter>
-              <sld:CssParameter name="font-style">normal</sld:CssParameter>
-              <sld:CssParameter name="font-weight">normal</sld:CssParameter>
-            </sld:Font>
-            <sld:LabelPlacement>
-              <sld:PointPlacement>
-                <sld:AnchorPoint>
-                  <sld:AnchorPointX>0.5</sld:AnchorPointX>
-                  <sld:AnchorPointY>1.0</sld:AnchorPointY>
-                </sld:AnchorPoint>
-                <sld:Displacement>
-                  <sld:DisplacementX>
-                    <ogc:Mul>
-                      <ogc:Literal>12</ogc:Literal>
-                      <ogc:Literal>0</ogc:Literal>
-                    </ogc:Mul>
-                  </sld:DisplacementX>
-                  <sld:DisplacementY>
-                    <ogc:Mul>
-                      <ogc:Literal>12</ogc:Literal>
-                      <ogc:Mul>
-                        <ogc:Literal>-1</ogc:Literal>
-                        <ogc:Literal>0.6</ogc:Literal>
-                      </ogc:Mul>
-                    </ogc:Mul>
-                  </sld:DisplacementY>
-                </sld:Displacement>
-              </sld:PointPlacement>
-            </sld:LabelPlacement>
-            <sld:Halo>
-              <sld:Radius>1</sld:Radius>
-              <sld:Fill>
-                <sld:CssParameter name="fill">#FFFFFF</sld:CssParameter>
-              </sld:Fill>
-            </sld:Halo>
-            <sld:Fill>
-              <sld:CssParameter name="fill">#666666</sld:CssParameter>
-            </sld:Fill>
-            <sld:Graphic>
-              <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(class,'_11'))}&amp;size=${strURLEncode(1.0)}"/>
-                <sld:Format>mbsprite</sld:Format>
-              </sld:ExternalGraphic>
-              <sld:AnchorPoint>
-                <sld:AnchorPointX>0.5</sld:AnchorPointX>
-                <sld:AnchorPointY>0.5</sld:AnchorPointY>
-              </sld:AnchorPoint>
-              <sld:Displacement>
-                <sld:DisplacementX>
-                  <ogc:Mul>
-                    <ogc:Literal>1.0</ogc:Literal>
-                    <ogc:Literal>0</ogc:Literal>
-                  </ogc:Mul>
-                </sld:DisplacementX>
-                <sld:DisplacementY>
-                  <ogc:Mul>
-                    <ogc:Literal>1.0</ogc:Literal>
-                    <ogc:Mul>
-                      <ogc:Literal>-1</ogc:Literal>
-                      <ogc:Literal>0</ogc:Literal>
-                    </ogc:Mul>
-                  </ogc:Mul>
-                </sld:DisplacementY>
-              </sld:Displacement>
-            </sld:Graphic>
-            <sld:Priority>8000</sld:Priority>
-            <sld:VendorOption name="repeat">250</sld:VendorOption>
-            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
-            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
-            <sld:VendorOption name="partials">false</sld:VendorOption>
-            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
-            <sld:VendorOption name="spaceAround">2</sld:VendorOption>
-            <sld:VendorOption name="autoWrap">108.0</sld:VendorOption>
-            <sld:VendorOption name="graphicPlacement">INDEPENDENT</sld:VendorOption>
-            <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
-          </sld:TextSymbolizer>
-        </sld:Rule>
-      </sld:FeatureTypeStyle>
-    </sld:UserStyle>
-  </sld:NamedLayer>
-  <sld:NamedLayer>
     <sld:Name>transportation</sld:Name>
     <sld:UserStyle>
       <sld:Name>Default Styler</sld:Name>
@@ -5456,7 +6419,9 @@
           </ogc:Filter>
           <sld:MaxScaleDenominator>8530.918334211623</sld:MaxScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
-            <sld:Label><![CDATA[ ]]></sld:Label>
+            <sld:Label>
+              <![CDATA[ ]]>
+            </sld:Label>
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
@@ -5490,7 +6455,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/osm-bright-gl-style/sprite#icon=${strURLEncode('oneway')}&amp;size=${strURLEncode(Interpolate(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),15,0.5,19,1,'numeric'))}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode('oneway')}&amp;size=${strURLEncode(Interpolate(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),15,0.5,19,1,'numeric'))}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:Opacity>0.5</sld:Opacity>
@@ -5541,7 +6506,7 @@
                 </sld:DisplacementY>
               </sld:Displacement>
             </sld:Graphic>
-            <sld:Priority>9000</sld:Priority>
+            <sld:Priority>5000</sld:Priority>
             <sld:VendorOption name="repeat">75</sld:VendorOption>
             <sld:VendorOption name="forceLeftToRight">true</sld:VendorOption>
             <sld:VendorOption name="followLine">true</sld:VendorOption>
@@ -5586,7 +6551,9 @@
           </ogc:Filter>
           <sld:MaxScaleDenominator>8530.918334211623</sld:MaxScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
-            <sld:Label><![CDATA[ ]]></sld:Label>
+            <sld:Label>
+              <![CDATA[ ]]>
+            </sld:Label>
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
@@ -5620,7 +6587,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/osm-bright-gl-style/sprite#icon=${strURLEncode('oneway')}&amp;size=${strURLEncode(Interpolate(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),15,0.5,19,1,'numeric'))}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode('oneway')}&amp;size=${strURLEncode(Interpolate(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),15,0.5,19,1,'numeric'))}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:Opacity>0.5</sld:Opacity>
@@ -5671,7 +6638,7 @@
                 </sld:DisplacementY>
               </sld:Displacement>
             </sld:Graphic>
-            <sld:Priority>10000</sld:Priority>
+            <sld:Priority>6000</sld:Priority>
             <sld:VendorOption name="repeat">75</sld:VendorOption>
             <sld:VendorOption name="forceLeftToRight">true</sld:VendorOption>
             <sld:VendorOption name="followLine">true</sld:VendorOption>
@@ -5683,6 +6650,509 @@
             <sld:VendorOption name="partials">false</sld:VendorOption>
             <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
             <sld:VendorOption name="spaceAround">2</sld:VendorOption>
+            <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
+          </sld:TextSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+    </sld:UserStyle>
+  </sld:NamedLayer>
+  <sld:NamedLayer>
+    <sld:Name>poi</sld:Name>
+    <sld:UserStyle>
+      <sld:Name>Default Styler</sld:Name>
+      <sld:FeatureTypeStyle>
+        <sld:Name>poi-level-3</sld:Name>
+        <sld:Title>MBStyle poi-level-3</sld:Title>
+        <sld:Abstract>Generated for poi</sld:Abstract>
+        <sld:SemanticTypeIdentifier>POINT</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>poi-level-3</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="dimension">
+                  <ogc:Function name="geometry"/>
+                </ogc:Function>
+                <ogc:Literal>0</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsGreaterThanOrEqualTo>
+                <ogc:PropertyName>rank</ogc:PropertyName>
+                <ogc:Literal>25</ogc:Literal>
+              </ogc:PropertyIsGreaterThanOrEqualTo>
+              <ogc:Or>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>level</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+                <ogc:PropertyIsEqualTo>
+                  <ogc:PropertyName>level</ogc:PropertyName>
+                  <ogc:Literal>0</ogc:Literal>
+                </ogc:PropertyIsEqualTo>
+              </ogc:Or>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:MaxScaleDenominator>4265.4591671058115</sld:MaxScaleDenominator>
+          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Label>
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[
+]]>
+              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
+            </sld:Label>
+            <sld:Font>
+              <sld:CssParameter name="font-family">
+                <ogc:Function name="fontAlternatives">
+                  <ogc:Literal>Noto Sans</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="font-size">12</sld:CssParameter>
+              <sld:CssParameter name="font-style">normal</sld:CssParameter>
+              <sld:CssParameter name="font-weight">normal</sld:CssParameter>
+            </sld:Font>
+            <sld:LabelPlacement>
+              <sld:PointPlacement>
+                <sld:AnchorPoint>
+                  <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                  <sld:AnchorPointY>1.0</sld:AnchorPointY>
+                </sld:AnchorPoint>
+                <sld:Displacement>
+                  <sld:DisplacementX>
+                    <ogc:Mul>
+                      <ogc:Literal>12</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </sld:DisplacementX>
+                  <sld:DisplacementY>
+                    <ogc:Mul>
+                      <ogc:Literal>12</ogc:Literal>
+                      <ogc:Mul>
+                        <ogc:Literal>-1</ogc:Literal>
+                        <ogc:Literal>0.6</ogc:Literal>
+                      </ogc:Mul>
+                    </ogc:Mul>
+                  </sld:DisplacementY>
+                </sld:Displacement>
+              </sld:PointPlacement>
+            </sld:LabelPlacement>
+            <sld:Halo>
+              <sld:Radius>1</sld:Radius>
+              <sld:Fill>
+                <sld:CssParameter name="fill">#FFFFFF</sld:CssParameter>
+              </sld:Fill>
+            </sld:Halo>
+            <sld:Fill>
+              <sld:CssParameter name="fill">#666666</sld:CssParameter>
+            </sld:Fill>
+            <sld:Graphic>
+              <sld:ExternalGraphic>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(class,'_11'))}&amp;size=${strURLEncode(1.0)}"/>
+                <sld:Format>mbsprite</sld:Format>
+              </sld:ExternalGraphic>
+              <sld:AnchorPoint>
+                <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                <sld:AnchorPointY>0.5</sld:AnchorPointY>
+              </sld:AnchorPoint>
+              <sld:Displacement>
+                <sld:DisplacementX>
+                  <ogc:Mul>
+                    <ogc:Literal>1.0</ogc:Literal>
+                    <ogc:Literal>0</ogc:Literal>
+                  </ogc:Mul>
+                </sld:DisplacementX>
+                <sld:DisplacementY>
+                  <ogc:Mul>
+                    <ogc:Literal>1.0</ogc:Literal>
+                    <ogc:Mul>
+                      <ogc:Literal>-1</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </ogc:Mul>
+                </sld:DisplacementY>
+              </sld:Displacement>
+            </sld:Graphic>
+            <sld:Priority>7000</sld:Priority>
+            <sld:VendorOption name="repeat">250</sld:VendorOption>
+            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
+            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
+            <sld:VendorOption name="partials">false</sld:VendorOption>
+            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
+            <sld:VendorOption name="spaceAround">2</sld:VendorOption>
+            <sld:VendorOption name="autoWrap">108.0</sld:VendorOption>
+            <sld:VendorOption name="graphicPlacement">INDEPENDENT</sld:VendorOption>
+            <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
+          </sld:TextSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>poi-level-2</sld:Name>
+        <sld:Title>MBStyle poi-level-2</sld:Title>
+        <sld:Abstract>Generated for poi</sld:Abstract>
+        <sld:SemanticTypeIdentifier>POINT</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>poi-level-2</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="dimension">
+                  <ogc:Function name="geometry"/>
+                </ogc:Function>
+                <ogc:Literal>0</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsLessThanOrEqualTo>
+                <ogc:PropertyName>rank</ogc:PropertyName>
+                <ogc:Literal>24</ogc:Literal>
+              </ogc:PropertyIsLessThanOrEqualTo>
+              <ogc:PropertyIsGreaterThanOrEqualTo>
+                <ogc:PropertyName>rank</ogc:PropertyName>
+                <ogc:Literal>15</ogc:Literal>
+              </ogc:PropertyIsGreaterThanOrEqualTo>
+              <ogc:Or>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>level</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+                <ogc:PropertyIsEqualTo>
+                  <ogc:PropertyName>level</ogc:PropertyName>
+                  <ogc:Literal>0</ogc:Literal>
+                </ogc:PropertyIsEqualTo>
+              </ogc:Or>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:MaxScaleDenominator>8530.918334211623</sld:MaxScaleDenominator>
+          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Label>
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[
+]]>
+              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
+            </sld:Label>
+            <sld:Font>
+              <sld:CssParameter name="font-family">
+                <ogc:Function name="fontAlternatives">
+                  <ogc:Literal>Noto Sans</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="font-size">12</sld:CssParameter>
+              <sld:CssParameter name="font-style">normal</sld:CssParameter>
+              <sld:CssParameter name="font-weight">normal</sld:CssParameter>
+            </sld:Font>
+            <sld:LabelPlacement>
+              <sld:PointPlacement>
+                <sld:AnchorPoint>
+                  <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                  <sld:AnchorPointY>1.0</sld:AnchorPointY>
+                </sld:AnchorPoint>
+                <sld:Displacement>
+                  <sld:DisplacementX>
+                    <ogc:Mul>
+                      <ogc:Literal>12</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </sld:DisplacementX>
+                  <sld:DisplacementY>
+                    <ogc:Mul>
+                      <ogc:Literal>12</ogc:Literal>
+                      <ogc:Mul>
+                        <ogc:Literal>-1</ogc:Literal>
+                        <ogc:Literal>0.6</ogc:Literal>
+                      </ogc:Mul>
+                    </ogc:Mul>
+                  </sld:DisplacementY>
+                </sld:Displacement>
+              </sld:PointPlacement>
+            </sld:LabelPlacement>
+            <sld:Halo>
+              <sld:Radius>1</sld:Radius>
+              <sld:Fill>
+                <sld:CssParameter name="fill">#FFFFFF</sld:CssParameter>
+              </sld:Fill>
+            </sld:Halo>
+            <sld:Fill>
+              <sld:CssParameter name="fill">#666666</sld:CssParameter>
+            </sld:Fill>
+            <sld:Graphic>
+              <sld:ExternalGraphic>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(class,'_11'))}&amp;size=${strURLEncode(1.0)}"/>
+                <sld:Format>mbsprite</sld:Format>
+              </sld:ExternalGraphic>
+              <sld:AnchorPoint>
+                <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                <sld:AnchorPointY>0.5</sld:AnchorPointY>
+              </sld:AnchorPoint>
+              <sld:Displacement>
+                <sld:DisplacementX>
+                  <ogc:Mul>
+                    <ogc:Literal>1.0</ogc:Literal>
+                    <ogc:Literal>0</ogc:Literal>
+                  </ogc:Mul>
+                </sld:DisplacementX>
+                <sld:DisplacementY>
+                  <ogc:Mul>
+                    <ogc:Literal>1.0</ogc:Literal>
+                    <ogc:Mul>
+                      <ogc:Literal>-1</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </ogc:Mul>
+                </sld:DisplacementY>
+              </sld:Displacement>
+            </sld:Graphic>
+            <sld:Priority>8000</sld:Priority>
+            <sld:VendorOption name="repeat">250</sld:VendorOption>
+            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
+            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
+            <sld:VendorOption name="partials">false</sld:VendorOption>
+            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
+            <sld:VendorOption name="spaceAround">2</sld:VendorOption>
+            <sld:VendorOption name="autoWrap">108.0</sld:VendorOption>
+            <sld:VendorOption name="graphicPlacement">INDEPENDENT</sld:VendorOption>
+            <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
+          </sld:TextSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>poi-level-1</sld:Name>
+        <sld:Title>MBStyle poi-level-1</sld:Title>
+        <sld:Abstract>Generated for poi</sld:Abstract>
+        <sld:SemanticTypeIdentifier>POINT</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>poi-level-1</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="dimension">
+                  <ogc:Function name="geometry"/>
+                </ogc:Function>
+                <ogc:Literal>0</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsLessThanOrEqualTo>
+                <ogc:PropertyName>rank</ogc:PropertyName>
+                <ogc:Literal>14</ogc:Literal>
+              </ogc:PropertyIsLessThanOrEqualTo>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>name</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
+              <ogc:Or>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>level</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+                <ogc:PropertyIsEqualTo>
+                  <ogc:PropertyName>level</ogc:PropertyName>
+                  <ogc:Literal>0</ogc:Literal>
+                </ogc:PropertyIsEqualTo>
+              </ogc:Or>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:MaxScaleDenominator>17061.836668423246</sld:MaxScaleDenominator>
+          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Label>
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[
+]]>
+              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
+            </sld:Label>
+            <sld:Font>
+              <sld:CssParameter name="font-family">
+                <ogc:Function name="fontAlternatives">
+                  <ogc:Literal>Noto Sans</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="font-size">12</sld:CssParameter>
+              <sld:CssParameter name="font-style">normal</sld:CssParameter>
+              <sld:CssParameter name="font-weight">normal</sld:CssParameter>
+            </sld:Font>
+            <sld:LabelPlacement>
+              <sld:PointPlacement>
+                <sld:AnchorPoint>
+                  <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                  <sld:AnchorPointY>1.0</sld:AnchorPointY>
+                </sld:AnchorPoint>
+                <sld:Displacement>
+                  <sld:DisplacementX>
+                    <ogc:Mul>
+                      <ogc:Literal>12</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </sld:DisplacementX>
+                  <sld:DisplacementY>
+                    <ogc:Mul>
+                      <ogc:Literal>12</ogc:Literal>
+                      <ogc:Mul>
+                        <ogc:Literal>-1</ogc:Literal>
+                        <ogc:Literal>0.6</ogc:Literal>
+                      </ogc:Mul>
+                    </ogc:Mul>
+                  </sld:DisplacementY>
+                </sld:Displacement>
+              </sld:PointPlacement>
+            </sld:LabelPlacement>
+            <sld:Halo>
+              <sld:Radius>1</sld:Radius>
+              <sld:Fill>
+                <sld:CssParameter name="fill">#FFFFFF</sld:CssParameter>
+              </sld:Fill>
+            </sld:Halo>
+            <sld:Fill>
+              <sld:CssParameter name="fill">#666666</sld:CssParameter>
+            </sld:Fill>
+            <sld:Graphic>
+              <sld:ExternalGraphic>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(class,'_11'))}&amp;size=${strURLEncode(1.0)}"/>
+                <sld:Format>mbsprite</sld:Format>
+              </sld:ExternalGraphic>
+              <sld:AnchorPoint>
+                <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                <sld:AnchorPointY>0.5</sld:AnchorPointY>
+              </sld:AnchorPoint>
+              <sld:Displacement>
+                <sld:DisplacementX>
+                  <ogc:Mul>
+                    <ogc:Literal>1.0</ogc:Literal>
+                    <ogc:Literal>0</ogc:Literal>
+                  </ogc:Mul>
+                </sld:DisplacementX>
+                <sld:DisplacementY>
+                  <ogc:Mul>
+                    <ogc:Literal>1.0</ogc:Literal>
+                    <ogc:Mul>
+                      <ogc:Literal>-1</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </ogc:Mul>
+                </sld:DisplacementY>
+              </sld:Displacement>
+            </sld:Graphic>
+            <sld:Priority>9000</sld:Priority>
+            <sld:VendorOption name="repeat">250</sld:VendorOption>
+            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
+            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
+            <sld:VendorOption name="partials">false</sld:VendorOption>
+            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
+            <sld:VendorOption name="spaceAround">2</sld:VendorOption>
+            <sld:VendorOption name="autoWrap">108.0</sld:VendorOption>
+            <sld:VendorOption name="graphicPlacement">INDEPENDENT</sld:VendorOption>
+            <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
+          </sld:TextSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>poi-railway</sld:Name>
+        <sld:Title>MBStyle poi-railway</sld:Title>
+        <sld:Abstract>Generated for poi</sld:Abstract>
+        <sld:SemanticTypeIdentifier>POINT</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>poi-railway</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:Function name="dimension">
+                  <ogc:Function name="geometry"/>
+                </ogc:Function>
+                <ogc:Literal>0</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>name</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>railway</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>subclass</ogc:PropertyName>
+                <ogc:Literal>station</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:MaxScaleDenominator>34123.67333684649</sld:MaxScaleDenominator>
+          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Label>
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[
+]]>
+              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
+            </sld:Label>
+            <sld:Font>
+              <sld:CssParameter name="font-family">
+                <ogc:Function name="fontAlternatives">
+                  <ogc:Literal>Noto Sans</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="font-size">12</sld:CssParameter>
+              <sld:CssParameter name="font-style">normal</sld:CssParameter>
+              <sld:CssParameter name="font-weight">normal</sld:CssParameter>
+            </sld:Font>
+            <sld:LabelPlacement>
+              <sld:PointPlacement>
+                <sld:AnchorPoint>
+                  <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                  <sld:AnchorPointY>1.0</sld:AnchorPointY>
+                </sld:AnchorPoint>
+                <sld:Displacement>
+                  <sld:DisplacementX>
+                    <ogc:Mul>
+                      <ogc:Literal>12</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </sld:DisplacementX>
+                  <sld:DisplacementY>
+                    <ogc:Mul>
+                      <ogc:Literal>12</ogc:Literal>
+                      <ogc:Mul>
+                        <ogc:Literal>-1</ogc:Literal>
+                        <ogc:Literal>0.6</ogc:Literal>
+                      </ogc:Mul>
+                    </ogc:Mul>
+                  </sld:DisplacementY>
+                </sld:Displacement>
+              </sld:PointPlacement>
+            </sld:LabelPlacement>
+            <sld:Halo>
+              <sld:Radius>1</sld:Radius>
+              <sld:Fill>
+                <sld:CssParameter name="fill">#FFFFFF</sld:CssParameter>
+              </sld:Fill>
+            </sld:Halo>
+            <sld:Fill>
+              <sld:CssParameter name="fill">#666666</sld:CssParameter>
+            </sld:Fill>
+            <sld:Graphic>
+              <sld:ExternalGraphic>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(class,'_11'))}&amp;size=${strURLEncode(1.0)}"/>
+                <sld:Format>mbsprite</sld:Format>
+              </sld:ExternalGraphic>
+              <sld:AnchorPoint>
+                <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                <sld:AnchorPointY>0.5</sld:AnchorPointY>
+              </sld:AnchorPoint>
+              <sld:Displacement>
+                <sld:DisplacementX>
+                  <ogc:Mul>
+                    <ogc:Literal>1.0</ogc:Literal>
+                    <ogc:Literal>0</ogc:Literal>
+                  </ogc:Mul>
+                </sld:DisplacementX>
+                <sld:DisplacementY>
+                  <ogc:Mul>
+                    <ogc:Literal>1.0</ogc:Literal>
+                    <ogc:Mul>
+                      <ogc:Literal>-1</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </ogc:Mul>
+                </sld:DisplacementY>
+              </sld:Displacement>
+            </sld:Graphic>
+            <sld:Priority>10000</sld:Priority>
+            <sld:VendorOption name="repeat">250</sld:VendorOption>
+            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
+            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
+            <sld:VendorOption name="partials">false</sld:VendorOption>
+            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
+            <sld:VendorOption name="spaceAround">2</sld:VendorOption>
+            <sld:VendorOption name="autoWrap">108.0</sld:VendorOption>
+            <sld:VendorOption name="graphicPlacement">INDEPENDENT</sld:VendorOption>
             <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
           </sld:TextSymbolizer>
         </sld:Rule>
@@ -5708,7 +7178,8 @@
           <sld:MaxScaleDenominator>8530.918334211623</sld:MaxScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[ ]]>
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[ ]]>
               <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
             </sld:Label>
             <sld:Font>
@@ -5813,7 +7284,8 @@
           <sld:MaxScaleDenominator>8530.918334211623</sld:MaxScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[ ]]>
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[ ]]>
               <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
             </sld:Label>
             <sld:Font>
@@ -5904,7 +7376,8 @@
           <sld:MaxScaleDenominator>68247.34667369298</sld:MaxScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[ ]]>
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[ ]]>
               <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
             </sld:Label>
             <sld:Font>
@@ -6032,7 +7505,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate('road_',ref_length))}&amp;size=${strURLEncode(1)}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate('road_',ref_length))}&amp;size=${strURLEncode(1)}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:AnchorPoint>
@@ -6125,7 +7598,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(network,'_',ref_length))}&amp;size=${strURLEncode(1)}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(network,'_',ref_length))}&amp;size=${strURLEncode(1)}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:AnchorPoint>
@@ -6219,7 +7692,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(network,'_',ref_length))}&amp;size=${strURLEncode(1)}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode(Concatenate(network,'_',ref_length))}&amp;size=${strURLEncode(1)}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:AnchorPoint>
@@ -6259,6 +7732,119 @@
     </sld:UserStyle>
   </sld:NamedLayer>
   <sld:NamedLayer>
+    <sld:Name>aerodrome_label</sld:Name>
+    <sld:UserStyle>
+      <sld:Name>Default Styler</sld:Name>
+      <sld:FeatureTypeStyle>
+        <sld:Name>airport-label-major</sld:Name>
+        <sld:Title>MBStyle airport-label-major</sld:Title>
+        <sld:Abstract>Generated for aerodrome_label</sld:Abstract>
+        <sld:Rule>
+          <sld:Name>airport-label-major</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>iata</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:MaxScaleDenominator>272989.38669477194</sld:MaxScaleDenominator>
+          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Label>
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[
+]]>
+              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
+            </sld:Label>
+            <sld:Font>
+              <sld:CssParameter name="font-family">
+                <ogc:Function name="fontAlternatives">
+                  <ogc:Literal>Noto Sans</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="font-size">12</sld:CssParameter>
+              <sld:CssParameter name="font-style">normal</sld:CssParameter>
+              <sld:CssParameter name="font-weight">normal</sld:CssParameter>
+            </sld:Font>
+            <sld:LabelPlacement>
+              <sld:PointPlacement>
+                <sld:AnchorPoint>
+                  <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                  <sld:AnchorPointY>1.0</sld:AnchorPointY>
+                </sld:AnchorPoint>
+                <sld:Displacement>
+                  <sld:DisplacementX>
+                    <ogc:Mul>
+                      <ogc:Literal>12</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </sld:DisplacementX>
+                  <sld:DisplacementY>
+                    <ogc:Mul>
+                      <ogc:Literal>12</ogc:Literal>
+                      <ogc:Mul>
+                        <ogc:Literal>-1</ogc:Literal>
+                        <ogc:Literal>0.6</ogc:Literal>
+                      </ogc:Mul>
+                    </ogc:Mul>
+                  </sld:DisplacementY>
+                </sld:Displacement>
+              </sld:PointPlacement>
+            </sld:LabelPlacement>
+            <sld:Halo>
+              <sld:Radius>1</sld:Radius>
+              <sld:Fill>
+                <sld:CssParameter name="fill">#FFFFFF</sld:CssParameter>
+              </sld:Fill>
+            </sld:Halo>
+            <sld:Fill>
+              <sld:CssParameter name="fill">#666666</sld:CssParameter>
+            </sld:Fill>
+            <sld:Graphic>
+              <sld:ExternalGraphic>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode('airport_11')}&amp;size=${strURLEncode(1)}"/>
+                <sld:Format>mbsprite</sld:Format>
+              </sld:ExternalGraphic>
+              <sld:AnchorPoint>
+                <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                <sld:AnchorPointY>0.5</sld:AnchorPointY>
+              </sld:AnchorPoint>
+              <sld:Displacement>
+                <sld:DisplacementX>
+                  <ogc:Mul>
+                    <ogc:Literal>1</ogc:Literal>
+                    <ogc:Literal>0</ogc:Literal>
+                  </ogc:Mul>
+                </sld:DisplacementX>
+                <sld:DisplacementY>
+                  <ogc:Mul>
+                    <ogc:Literal>1</ogc:Literal>
+                    <ogc:Mul>
+                      <ogc:Literal>-1</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </ogc:Mul>
+                </sld:DisplacementY>
+              </sld:Displacement>
+            </sld:Graphic>
+            <sld:Priority>17000</sld:Priority>
+            <sld:VendorOption name="repeat">250</sld:VendorOption>
+            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
+            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
+            <sld:VendorOption name="partials">false</sld:VendorOption>
+            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
+            <sld:VendorOption name="spaceAround">2</sld:VendorOption>
+            <sld:VendorOption name="autoWrap">108.0</sld:VendorOption>
+            <sld:VendorOption name="graphicPlacement">INDEPENDENT</sld:VendorOption>
+            <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
+          </sld:TextSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+    </sld:UserStyle>
+  </sld:NamedLayer>
+  <sld:NamedLayer>
     <sld:Name>place</sld:Name>
     <sld:UserStyle>
       <sld:Name>Default Styler</sld:Name>
@@ -6275,6 +7861,7 @@
                 <ogc:Literal>city</ogc:Literal>
                 <ogc:Literal>town</ogc:Literal>
                 <ogc:Literal>village</ogc:Literal>
+                <ogc:Literal>state</ogc:Literal>
                 <ogc:Literal>country</ogc:Literal>
                 <ogc:Literal>continent</ogc:Literal>
               </ogc:Function>
@@ -6287,7 +7874,9 @@
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
                   <ogc:Literal>
-</ogc:Literal>
+                    <![CDATA[
+]]>
+                  </ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -6334,7 +7923,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#663333</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>17000</sld:Priority>
+            <sld:Priority>18000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -6359,7 +7948,8 @@
           </ogc:Filter>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[
 ]]>
               <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
             </sld:Label>
@@ -6404,7 +7994,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#333333</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>18000</sld:Priority>
+            <sld:Priority>19000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -6429,7 +8019,8 @@
           </ogc:Filter>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[
 ]]>
               <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
             </sld:Label>
@@ -6474,7 +8065,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#333333</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>19000</sld:Priority>
+            <sld:Priority>20000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -6505,7 +8096,8 @@
           </ogc:Filter>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[
 ]]>
               <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
             </sld:Label>
@@ -6550,7 +8142,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#333333</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>20000</sld:Priority>
+            <sld:Priority>21000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -6581,7 +8173,8 @@
           </ogc:Filter>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
+              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <![CDATA[
 ]]>
               <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
             </sld:Label>
@@ -6669,7 +8262,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/osm-bright-gl-style/sprite#icon=${strURLEncode('star_11')}&amp;size=${strURLEncode(0.8)}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./osm-bright-gl-style/sprite#icon=${strURLEncode('star_11')}&amp;size=${strURLEncode(0.8)}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:AnchorPoint>
@@ -6694,7 +8287,7 @@
                 </sld:DisplacementY>
               </sld:Displacement>
             </sld:Graphic>
-            <sld:Priority>21000</sld:Priority>
+            <sld:Priority>22000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -6704,6 +8297,80 @@
             <sld:VendorOption name="autoWrap">128.0</sld:VendorOption>
             <sld:VendorOption name="graphicPlacement">INDEPENDENT</sld:VendorOption>
             <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
+          </sld:TextSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>place-state</sld:Name>
+        <sld:Title>MBStyle place-state</sld:Title>
+        <sld:Abstract>Generated for place</sld:Abstract>
+        <sld:Rule>
+          <sld:Name>place-state</sld:Name>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo>
+              <ogc:Function name="in">
+                <ogc:PropertyName>class</ogc:PropertyName>
+                <ogc:Literal>state</ogc:Literal>
+              </ogc:Function>
+              <ogc:Literal>true</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Label>
+              <ogc:Function name="StringTransform">
+                <ogc:PropertyName>name:latin</ogc:PropertyName>
+                <ogc:Literal>uppercase</ogc:Literal>
+              </ogc:Function>
+            </sld:Label>
+            <sld:Font>
+              <sld:CssParameter name="font-family">
+                <ogc:Function name="fontAlternatives">
+                  <ogc:Literal>Noto Sans</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="font-size">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.2</ogc:Literal>
+                  <ogc:Literal>12</ogc:Literal>
+                  <ogc:Literal>10</ogc:Literal>
+                  <ogc:Literal>15</ogc:Literal>
+                  <ogc:Literal>14</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="font-style">normal</sld:CssParameter>
+              <sld:CssParameter name="font-weight">bold</sld:CssParameter>
+            </sld:Font>
+            <sld:LabelPlacement>
+              <sld:PointPlacement>
+                <sld:AnchorPoint>
+                  <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                  <sld:AnchorPointY>0.5</sld:AnchorPointY>
+                </sld:AnchorPoint>
+              </sld:PointPlacement>
+            </sld:LabelPlacement>
+            <sld:Halo>
+              <sld:Radius>1.2</sld:Radius>
+              <sld:Fill>
+                <sld:CssParameter name="fill">#FFFFFF</sld:CssParameter>
+              </sld:Fill>
+            </sld:Halo>
+            <sld:Fill>
+              <sld:CssParameter name="fill">#663333</sld:CssParameter>
+            </sld:Fill>
+            <sld:Priority>23000</sld:Priority>
+            <sld:VendorOption name="repeat">250</sld:VendorOption>
+            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
+            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
+            <sld:VendorOption name="partials">false</sld:VendorOption>
+            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
+            <sld:VendorOption name="spaceAround">2.0</sld:VendorOption>
+            <sld:VendorOption name="autoWrap">144.0</sld:VendorOption>
           </sld:TextSymbolizer>
         </sld:Rule>
       </sld:FeatureTypeStyle>
@@ -6723,6 +8390,9 @@
                 <ogc:PropertyName>rank</ogc:PropertyName>
                 <ogc:Literal>3</ogc:Literal>
               </ogc:PropertyIsGreaterThanOrEqualTo>
+              <ogc:PropertyIsNull>
+                <ogc:PropertyName>iso_a2</ogc:PropertyName>
+              </ogc:PropertyIsNull>
             </ogc:And>
           </ogc:Filter>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -6773,7 +8443,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#333344</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>22000</sld:Priority>
+            <sld:Priority>24000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -6800,6 +8470,11 @@
                 <ogc:PropertyName>rank</ogc:PropertyName>
                 <ogc:Literal>3</ogc:Literal>
               </ogc:PropertyIsGreaterThanOrEqualTo>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>iso_a2</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
             </ogc:And>
           </ogc:Filter>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -6850,7 +8525,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#333344</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>23000</sld:Priority>
+            <sld:Priority>25000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -6877,6 +8552,11 @@
                 <ogc:PropertyName>rank</ogc:PropertyName>
                 <ogc:Literal>2</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>iso_a2</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
             </ogc:And>
           </ogc:Filter>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -6927,7 +8607,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#333344</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>24000</sld:Priority>
+            <sld:Priority>26000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -6954,6 +8634,11 @@
                 <ogc:PropertyName>rank</ogc:PropertyName>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>iso_a2</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
             </ogc:And>
           </ogc:Filter>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -7004,7 +8689,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#333344</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>25000</sld:Priority>
+            <sld:Priority>27000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -7062,7 +8747,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#333344</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>26000</sld:Priority>
+            <sld:Priority>28000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>

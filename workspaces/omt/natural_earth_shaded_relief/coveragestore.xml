@@ -8,5 +8,7 @@
   </workspace>
   <__default>false</__default>
   <dateCreated>2019-12-12 10:15:28.52 UTC</dateCreated>
-  <url>/home/aaime/devel/gisData/naturalEarth/NE2_HR_LC_SR.tif</url>
+  <dateModified>2024-09-24 15:02:48.394 UTC</dateModified>
+  <disableOnConnFailure>false</disableOnConnFailure>
+  <url>file:data/NE2_HR_LC_SR_W_COG.tif</url>
 </coverageStore>

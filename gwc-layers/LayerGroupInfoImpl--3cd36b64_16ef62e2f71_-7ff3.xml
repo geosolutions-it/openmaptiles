@@ -2,7 +2,7 @@
   <id>LayerGroupInfoImpl--3cd36b64:16ef62e2f71:-7ff3</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
-  <name>klokantech-basic-gl</name>
+  <name>maptiler-basic-gl</name>
   <mimeFormats>
     <string>image/png</string>
     <string>image/jpeg</string>
@@ -23,4 +23,5 @@
   <expireClients>0</expireClients>
   <parameterFilters/>
   <gutter>0</gutter>
+  <cacheWarningSkips/>
 </GeoServerTileLayer>

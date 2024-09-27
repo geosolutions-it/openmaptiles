@@ -1,59 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><sld:StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xmlns:sld="http://www.opengis.net/sld" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" version="1.0.0">
+<?xml version="1.0" encoding="UTF-8"?><sld:StyledLayerDescriptor xmlns:sld="http://www.opengis.net/sld" xmlns="http://www.opengis.net/sld" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" version="1.0.0">
   <sld:Name>Dark Matter</sld:Name>
-  <sld:UserLayer>
-    <sld:Name>background</sld:Name>
-    <sld:InlineFeature>
-      <FeatureCollection>
-        <gml:boundedBy>
-          <gml:Box srsName="4326">
-            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-180,-90 180,90</gml:coordinates>
-          </gml:Box>
-        </gml:boundedBy>
-        <gml:featureMember>
-          <gml:background fid="background">
-            <gml:geometry>
-              <gml:Polygon srsName="4326">
-                <gml:outerBoundaryIs>
-                  <gml:LinearRing>
-                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-180,-90 -180,90 180,90 180,-90 -180,-90</gml:coordinates>
-                  </gml:LinearRing>
-                </gml:outerBoundaryIs>
-              </gml:Polygon>
-            </gml:geometry>
-          </gml:background>
-        </gml:featureMember>
-      </FeatureCollection>
-    </sld:InlineFeature>
-    <sld:LayerFeatureConstraints>
-      <sld:FeatureTypeConstraint/>
-    </sld:LayerFeatureConstraints>
-    <sld:UserStyle>
-      <sld:Name>Default Styler</sld:Name>
-      <sld:FeatureTypeStyle>
-        <sld:Name>background</sld:Name>
-        <sld:Title>MBStyle background</sld:Title>
-        <sld:Abstract>Generated for null</sld:Abstract>
-        <sld:SemanticTypeIdentifier>POLYGON</sld:SemanticTypeIdentifier>
-        <sld:Rule>
-          <sld:Name>background</sld:Name>
-          <sld:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
-            <sld:Geometry>
-              <ogc:Function name="env">
-                <ogc:Literal>wms_bbox</ogc:Literal>
-              </ogc:Function>
-            </sld:Geometry>
-            <sld:Fill>
-              <sld:CssParameter name="fill">#0C0C0C</sld:CssParameter>
-            </sld:Fill>
-          </sld:PolygonSymbolizer>
-        </sld:Rule>
-      </sld:FeatureTypeStyle>
-    </sld:UserStyle>
-  </sld:UserLayer>
   <sld:NamedLayer>
     <sld:Name>water</sld:Name>
     <sld:UserStyle>
       <sld:Name>Default Styler</sld:Name>
+      <sld:Background>
+        <sld:CssParameter name="fill">#0C0C0C</sld:CssParameter>
+      </sld:Background>
       <sld:FeatureTypeStyle>
         <sld:Name>water</sld:Name>
         <sld:Title>MBStyle water</sld:Title>
@@ -63,18 +16,24 @@
           <sld:Name>water</sld:Name>
           <ogc:Filter>
             <ogc:And>
-              <ogc:PropertyIsEqualTo>
-                <ogc:Function name="dimension">
-                  <ogc:Function name="geometry"/>
-                </ogc:Function>
-                <ogc:Literal>2</ogc:Literal>
-              </ogc:PropertyIsEqualTo>
-              <ogc:Not>
+              <ogc:And>
                 <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="isCoverage"/>
-                  <ogc:Literal>true</ogc:Literal>
+                  <ogc:Function name="dimension">
+                    <ogc:Function name="geometry"/>
+                  </ogc:Function>
+                  <ogc:Literal>2</ogc:Literal>
                 </ogc:PropertyIsEqualTo>
-              </ogc:Not>
+                <ogc:Not>
+                  <ogc:PropertyIsEqualTo>
+                    <ogc:Function name="isCoverage"/>
+                    <ogc:Literal>true</ogc:Literal>
+                  </ogc:PropertyIsEqualTo>
+                </ogc:Not>
+              </ogc:And>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -294,7 +253,7 @@
               <sld:GraphicFill>
                 <sld:Graphic>
                   <sld:ExternalGraphic>
-                    <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/dark-matter-gl-style/sprite#icon=${strURLEncode('wood-pattern')}&amp;size=${strURLEncode('1')}"/>
+                    <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./dark-matter-gl-style/sprite#icon=${strURLEncode('wood-pattern')}&amp;size=${strURLEncode('1')}"/>
                     <sld:Format>mbsprite</sld:Format>
                   </sld:ExternalGraphic>
                   <sld:Opacity>
@@ -1274,6 +1233,239 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
+        <sld:Name>road_oneway</sld:Name>
+        <sld:Title>MBStyle road_oneway</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:Rule>
+          <sld:Name>road_oneway</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>oneway</ogc:PropertyName>
+                <ogc:Literal>1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:MaxScaleDenominator>8530.918334211623</sld:MaxScaleDenominator>
+          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Label><![CDATA[ ]]></sld:Label>
+            <sld:Font>
+              <sld:CssParameter name="font-family">
+                <ogc:Function name="fontAlternatives">
+                  <ogc:Literal>Open Sans</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="font-family">
+                <ogc:Function name="fontAlternatives">
+                  <ogc:Literal>Arial Unicode MS</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="font-size">16.0</sld:CssParameter>
+              <sld:CssParameter name="font-style">normal</sld:CssParameter>
+              <sld:CssParameter name="font-weight">normal</sld:CssParameter>
+            </sld:Font>
+            <sld:LabelPlacement>
+              <sld:LinePlacement>
+                <sld:PerpendicularOffset>
+                  <ogc:Mul>
+                    <ogc:Literal>16.0</ogc:Literal>
+                    <ogc:Mul>
+                      <ogc:Literal>-1</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </ogc:Mul>
+                </sld:PerpendicularOffset>
+              </sld:LinePlacement>
+            </sld:LabelPlacement>
+            <sld:Fill>
+              <sld:CssParameter name="fill">#000000</sld:CssParameter>
+            </sld:Fill>
+            <sld:Graphic>
+              <sld:ExternalGraphic>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./dark-matter-gl-style/sprite#icon=${strURLEncode('oneway')}&amp;size=${strURLEncode(Interpolate(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),15,0.5,19,1,'numeric'))}"/>
+                <sld:Format>mbsprite</sld:Format>
+              </sld:ExternalGraphic>
+              <sld:Opacity>0.5</sld:Opacity>
+              <sld:AnchorPoint>
+                <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                <sld:AnchorPointY>0.5</sld:AnchorPointY>
+              </sld:AnchorPoint>
+              <sld:Displacement>
+                <sld:DisplacementX>
+                  <ogc:Mul>
+                    <ogc:Function name="Interpolate">
+                      <ogc:Function name="zoomLevel">
+                        <ogc:Function name="env">
+                          <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                        </ogc:Function>
+                        <ogc:Literal>EPSG:3857</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>15</ogc:Literal>
+                      <ogc:Literal>0.5</ogc:Literal>
+                      <ogc:Literal>19</ogc:Literal>
+                      <ogc:Literal>1</ogc:Literal>
+                      <ogc:Literal>numeric</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>0</ogc:Literal>
+                  </ogc:Mul>
+                </sld:DisplacementX>
+                <sld:DisplacementY>
+                  <ogc:Mul>
+                    <ogc:Function name="Interpolate">
+                      <ogc:Function name="zoomLevel">
+                        <ogc:Function name="env">
+                          <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                        </ogc:Function>
+                        <ogc:Literal>EPSG:3857</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>15</ogc:Literal>
+                      <ogc:Literal>0.5</ogc:Literal>
+                      <ogc:Literal>19</ogc:Literal>
+                      <ogc:Literal>1</ogc:Literal>
+                      <ogc:Literal>numeric</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Mul>
+                      <ogc:Literal>-1</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </ogc:Mul>
+                </sld:DisplacementY>
+              </sld:Displacement>
+            </sld:Graphic>
+            <sld:Priority>2000</sld:Priority>
+            <sld:VendorOption name="repeat">200</sld:VendorOption>
+            <sld:VendorOption name="forceLeftToRight">true</sld:VendorOption>
+            <sld:VendorOption name="followLine">true</sld:VendorOption>
+            <sld:VendorOption name="maxAngleDelta">45.0</sld:VendorOption>
+            <sld:VendorOption name="group">true</sld:VendorOption>
+            <sld:VendorOption name="labelAllGroup">true</sld:VendorOption>
+            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
+            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
+            <sld:VendorOption name="partials">false</sld:VendorOption>
+            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
+            <sld:VendorOption name="spaceAround">2</sld:VendorOption>
+            <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
+          </sld:TextSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>road_oneway_opposite</sld:Name>
+        <sld:Title>MBStyle road_oneway_opposite</sld:Title>
+        <sld:Abstract>Generated for transportation</sld:Abstract>
+        <sld:Rule>
+          <sld:Name>road_oneway_opposite</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>oneway</ogc:PropertyName>
+                <ogc:Literal>-1</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:MaxScaleDenominator>8530.918334211623</sld:MaxScaleDenominator>
+          <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Label><![CDATA[ ]]></sld:Label>
+            <sld:Font>
+              <sld:CssParameter name="font-family">
+                <ogc:Function name="fontAlternatives">
+                  <ogc:Literal>Open Sans</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="font-family">
+                <ogc:Function name="fontAlternatives">
+                  <ogc:Literal>Arial Unicode MS</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+              <sld:CssParameter name="font-size">16.0</sld:CssParameter>
+              <sld:CssParameter name="font-style">normal</sld:CssParameter>
+              <sld:CssParameter name="font-weight">normal</sld:CssParameter>
+            </sld:Font>
+            <sld:LabelPlacement>
+              <sld:LinePlacement>
+                <sld:PerpendicularOffset>
+                  <ogc:Mul>
+                    <ogc:Literal>16.0</ogc:Literal>
+                    <ogc:Mul>
+                      <ogc:Literal>-1</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </ogc:Mul>
+                </sld:PerpendicularOffset>
+              </sld:LinePlacement>
+            </sld:LabelPlacement>
+            <sld:Fill>
+              <sld:CssParameter name="fill">#000000</sld:CssParameter>
+            </sld:Fill>
+            <sld:Graphic>
+              <sld:ExternalGraphic>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./dark-matter-gl-style/sprite#icon=${strURLEncode('oneway')}&amp;size=${strURLEncode(Interpolate(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),15,0.5,19,1,'numeric'))}"/>
+                <sld:Format>mbsprite</sld:Format>
+              </sld:ExternalGraphic>
+              <sld:Opacity>0.5</sld:Opacity>
+              <sld:Rotation>180.0</sld:Rotation>
+              <sld:AnchorPoint>
+                <sld:AnchorPointX>0.5</sld:AnchorPointX>
+                <sld:AnchorPointY>0.5</sld:AnchorPointY>
+              </sld:AnchorPoint>
+              <sld:Displacement>
+                <sld:DisplacementX>
+                  <ogc:Mul>
+                    <ogc:Function name="Interpolate">
+                      <ogc:Function name="zoomLevel">
+                        <ogc:Function name="env">
+                          <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                        </ogc:Function>
+                        <ogc:Literal>EPSG:3857</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>15</ogc:Literal>
+                      <ogc:Literal>0.5</ogc:Literal>
+                      <ogc:Literal>19</ogc:Literal>
+                      <ogc:Literal>1</ogc:Literal>
+                      <ogc:Literal>numeric</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>0</ogc:Literal>
+                  </ogc:Mul>
+                </sld:DisplacementX>
+                <sld:DisplacementY>
+                  <ogc:Mul>
+                    <ogc:Function name="Interpolate">
+                      <ogc:Function name="zoomLevel">
+                        <ogc:Function name="env">
+                          <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                        </ogc:Function>
+                        <ogc:Literal>EPSG:3857</ogc:Literal>
+                      </ogc:Function>
+                      <ogc:Literal>15</ogc:Literal>
+                      <ogc:Literal>0.5</ogc:Literal>
+                      <ogc:Literal>19</ogc:Literal>
+                      <ogc:Literal>1</ogc:Literal>
+                      <ogc:Literal>numeric</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Mul>
+                      <ogc:Literal>-1</ogc:Literal>
+                      <ogc:Literal>0</ogc:Literal>
+                    </ogc:Mul>
+                  </ogc:Mul>
+                </sld:DisplacementY>
+              </sld:Displacement>
+            </sld:Graphic>
+            <sld:Priority>3000</sld:Priority>
+            <sld:VendorOption name="repeat">200</sld:VendorOption>
+            <sld:VendorOption name="forceLeftToRight">true</sld:VendorOption>
+            <sld:VendorOption name="followLine">true</sld:VendorOption>
+            <sld:VendorOption name="maxAngleDelta">45.0</sld:VendorOption>
+            <sld:VendorOption name="group">true</sld:VendorOption>
+            <sld:VendorOption name="labelAllGroup">true</sld:VendorOption>
+            <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
+            <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
+            <sld:VendorOption name="partials">false</sld:VendorOption>
+            <sld:VendorOption name="graphic-margin">0</sld:VendorOption>
+            <sld:VendorOption name="spaceAround">2</sld:VendorOption>
+            <sld:VendorOption name="fallbackOnDefaultMark">false</sld:VendorOption>
+          </sld:TextSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
         <sld:Name>highway_motorway_subtle</sld:Name>
         <sld:Title>MBStyle highway_motorway_subtle</sld:Title>
         <sld:Abstract>Generated for transportation</sld:Abstract>
@@ -1664,7 +1856,7 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal> </ogc:Literal>
+                  <ogc:Literal><![CDATA[ ]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -1707,7 +1899,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#504E4E</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>2000</sld:Priority>
+            <sld:Priority>4000</sld:Priority>
             <sld:VendorOption name="repeat">350</sld:VendorOption>
             <sld:VendorOption name="forceLeftToRight">true</sld:VendorOption>
             <sld:VendorOption name="followLine">true</sld:VendorOption>
@@ -1778,7 +1970,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#5E5E5E</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>3000</sld:Priority>
+            <sld:Priority>5000</sld:Priority>
             <sld:VendorOption name="repeat">350</sld:VendorOption>
             <sld:VendorOption name="forceLeftToRight">true</sld:VendorOption>
             <sld:VendorOption name="followLine">true</sld:VendorOption>
@@ -1872,18 +2064,63 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
-        <sld:Name>boundary_country</sld:Name>
-        <sld:Title>MBStyle boundary_country</sld:Title>
+        <sld:Name>boundary_country_z0-4</sld:Name>
+        <sld:Title>MBStyle boundary_country_z0-4</sld:Title>
         <sld:Abstract>Generated for boundary</sld:Abstract>
         <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
         <sld:Rule>
-          <sld:Name>boundary_country</sld:Name>
+          <sld:Name>boundary_country_z0-4</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>admin_level</ogc:PropertyName>
+                <ogc:Literal>2</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNull>
+                <ogc:PropertyName>claimed_by</ogc:PropertyName>
+              </ogc:PropertyIsNull>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:MinScaleDenominator>8735660.374232702</sld:MinScaleDenominator>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#3B3B3B</sld:CssParameter>
+              <sld:CssParameter name="stroke-linecap">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.1</ogc:Literal>
+                  <ogc:Literal>3</ogc:Literal>
+                  <ogc:Literal>1</ogc:Literal>
+                  <ogc:Literal>22</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>boundary_country_z5-</sld:Name>
+        <sld:Title>MBStyle boundary_country_z5-</sld:Title>
+        <sld:Abstract>Generated for boundary</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>boundary_country_z5-</sld:Name>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>admin_level</ogc:PropertyName>
               <ogc:Literal>2</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <sld:MaxScaleDenominator>8735660.374232702</sld:MaxScaleDenominator>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Stroke>
               <sld:CssParameter name="stroke">#3B3B3B</sld:CssParameter>
@@ -1947,8 +2184,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2003,7 +2240,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#656565</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>4000</sld:Priority>
+            <sld:Priority>6000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -2040,8 +2277,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2096,7 +2333,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#656565</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>5000</sld:Priority>
+            <sld:Priority>7000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -2133,8 +2370,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2189,7 +2426,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#656565</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>6000</sld:Priority>
+            <sld:Priority>8000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -2226,8 +2463,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2320,7 +2557,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/dark-matter-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',9,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./dark-matter-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',9,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:Opacity>0.7</sld:Opacity>
@@ -2346,7 +2583,7 @@
                 </sld:DisplacementY>
               </sld:Displacement>
             </sld:Graphic>
-            <sld:Priority>7000</sld:Priority>
+            <sld:Priority>9000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -2389,8 +2626,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2483,7 +2720,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/dark-matter-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',9,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./dark-matter-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',9,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:Opacity>0.7</sld:Opacity>
@@ -2509,7 +2746,7 @@
                 </sld:DisplacementY>
               </sld:Displacement>
             </sld:Graphic>
-            <sld:Priority>8000</sld:Priority>
+            <sld:Priority>10000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -2552,8 +2789,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2646,7 +2883,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/dark-matter-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',9,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./dark-matter-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',9,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:Opacity>0.7</sld:Opacity>
@@ -2672,7 +2909,7 @@
                 </sld:DisplacementY>
               </sld:Displacement>
             </sld:Graphic>
-            <sld:Priority>9000</sld:Priority>
+            <sld:Priority>11000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -2711,8 +2948,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2750,7 +2987,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#656565</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>10000</sld:Priority>
+            <sld:Priority>12000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -2779,6 +3016,9 @@
                 <ogc:PropertyName>class</ogc:PropertyName>
                 <ogc:Literal>country</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNull>
+                <ogc:PropertyName>iso_a2</ogc:PropertyName>
+              </ogc:PropertyIsNull>
             </ogc:And>
           </ogc:Filter>
           <sld:MinScaleDenominator>1091957.5467790877</sld:MinScaleDenominator>
@@ -2835,7 +3075,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#656565</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>11000</sld:Priority>
+            <sld:Priority>13000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -2868,6 +3108,11 @@
                 <ogc:PropertyName>rank</ogc:PropertyName>
                 <ogc:Literal>2</ogc:Literal>
               </ogc:PropertyIsGreaterThanOrEqualTo>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>iso_a2</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
             </ogc:And>
           </ogc:Filter>
           <sld:MinScaleDenominator>1091957.5467790877</sld:MinScaleDenominator>
@@ -2924,7 +3169,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#656565</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>12000</sld:Priority>
+            <sld:Priority>14000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>
@@ -2957,6 +3202,11 @@
                 <ogc:PropertyName>class</ogc:PropertyName>
                 <ogc:Literal>country</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>iso_a2</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
             </ogc:And>
           </ogc:Filter>
           <sld:MinScaleDenominator>4367830.187116351</sld:MinScaleDenominator>
@@ -3015,7 +3265,7 @@
             <sld:Fill>
               <sld:CssParameter name="fill">#656565</sld:CssParameter>
             </sld:Fill>
-            <sld:Priority>13000</sld:Priority>
+            <sld:Priority>15000</sld:Priority>
             <sld:VendorOption name="repeat">250</sld:VendorOption>
             <sld:VendorOption name="conflictResolution">true</sld:VendorOption>
             <sld:VendorOption name="graphic-resize">NONE</sld:VendorOption>

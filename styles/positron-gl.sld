@@ -1,59 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><sld:StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xmlns:sld="http://www.opengis.net/sld" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" version="1.0.0">
+<?xml version="1.0" encoding="UTF-8"?><sld:StyledLayerDescriptor xmlns:sld="http://www.opengis.net/sld" xmlns="http://www.opengis.net/sld" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" version="1.0.0">
   <sld:Name>Positron</sld:Name>
-  <sld:UserLayer>
-    <sld:Name>background</sld:Name>
-    <sld:InlineFeature>
-      <FeatureCollection>
-        <gml:boundedBy>
-          <gml:Box srsName="4326">
-            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-180,-90 180,90</gml:coordinates>
-          </gml:Box>
-        </gml:boundedBy>
-        <gml:featureMember>
-          <gml:background fid="background">
-            <gml:geometry>
-              <gml:Polygon srsName="4326">
-                <gml:outerBoundaryIs>
-                  <gml:LinearRing>
-                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-180,-90 -180,90 180,90 180,-90 -180,-90</gml:coordinates>
-                  </gml:LinearRing>
-                </gml:outerBoundaryIs>
-              </gml:Polygon>
-            </gml:geometry>
-          </gml:background>
-        </gml:featureMember>
-      </FeatureCollection>
-    </sld:InlineFeature>
-    <sld:LayerFeatureConstraints>
-      <sld:FeatureTypeConstraint/>
-    </sld:LayerFeatureConstraints>
-    <sld:UserStyle>
-      <sld:Name>Default Styler</sld:Name>
-      <sld:FeatureTypeStyle>
-        <sld:Name>background</sld:Name>
-        <sld:Title>MBStyle background</sld:Title>
-        <sld:Abstract>Generated for null</sld:Abstract>
-        <sld:SemanticTypeIdentifier>POLYGON</sld:SemanticTypeIdentifier>
-        <sld:Rule>
-          <sld:Name>background</sld:Name>
-          <sld:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
-            <sld:Geometry>
-              <ogc:Function name="env">
-                <ogc:Literal>wms_bbox</ogc:Literal>
-              </ogc:Function>
-            </sld:Geometry>
-            <sld:Fill>
-              <sld:CssParameter name="fill">#F2F3F0</sld:CssParameter>
-            </sld:Fill>
-          </sld:PolygonSymbolizer>
-        </sld:Rule>
-      </sld:FeatureTypeStyle>
-    </sld:UserStyle>
-  </sld:UserLayer>
   <sld:NamedLayer>
     <sld:Name>park</sld:Name>
     <sld:UserStyle>
       <sld:Name>Default Styler</sld:Name>
+      <sld:Background>
+        <sld:CssParameter name="fill">#F2F3F0</sld:CssParameter>
+      </sld:Background>
       <sld:FeatureTypeStyle>
         <sld:Name>park</sld:Name>
         <sld:Title>MBStyle park</sld:Title>
@@ -102,18 +55,24 @@
           <sld:Name>water</sld:Name>
           <ogc:Filter>
             <ogc:And>
-              <ogc:PropertyIsEqualTo>
-                <ogc:Function name="dimension">
-                  <ogc:Function name="geometry"/>
-                </ogc:Function>
-                <ogc:Literal>2</ogc:Literal>
-              </ogc:PropertyIsEqualTo>
-              <ogc:Not>
+              <ogc:And>
                 <ogc:PropertyIsEqualTo>
-                  <ogc:Function name="isCoverage"/>
-                  <ogc:Literal>true</ogc:Literal>
+                  <ogc:Function name="dimension">
+                    <ogc:Function name="geometry"/>
+                  </ogc:Function>
+                  <ogc:Literal>2</ogc:Literal>
                 </ogc:PropertyIsEqualTo>
-              </ogc:Not>
+                <ogc:Not>
+                  <ogc:PropertyIsEqualTo>
+                    <ogc:Function name="isCoverage"/>
+                    <ogc:Literal>true</ogc:Literal>
+                  </ogc:PropertyIsEqualTo>
+                </ogc:Not>
+              </ogc:And>
+              <ogc:PropertyIsNotEqualTo>
+                <ogc:PropertyName>brunnel</ogc:PropertyName>
+                <ogc:Literal>tunnel</ogc:Literal>
+              </ogc:PropertyIsNotEqualTo>
             </ogc:And>
           </ogc:Filter>
           <sld:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
@@ -1957,7 +1916,7 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal> </ogc:Literal>
+                  <ogc:Literal><![CDATA[ ]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -1966,7 +1925,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Regular</ogc:Literal>
+                  <ogc:Literal>Metropolis Regular</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">
@@ -2043,7 +2002,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Light</ogc:Literal>
+                  <ogc:Literal>Metropolis Light</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">
@@ -2171,18 +2130,63 @@
         </sld:Rule>
       </sld:FeatureTypeStyle>
       <sld:FeatureTypeStyle>
-        <sld:Name>boundary_country</sld:Name>
-        <sld:Title>MBStyle boundary_country</sld:Title>
+        <sld:Name>boundary_country_z0-4</sld:Name>
+        <sld:Title>MBStyle boundary_country_z0-4</sld:Title>
         <sld:Abstract>Generated for boundary</sld:Abstract>
         <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
         <sld:Rule>
-          <sld:Name>boundary_country</sld:Name>
+          <sld:Name>boundary_country_z0-4</sld:Name>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>admin_level</ogc:PropertyName>
+                <ogc:Literal>2</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNull>
+                <ogc:PropertyName>claimed_by</ogc:PropertyName>
+              </ogc:PropertyIsNull>
+            </ogc:And>
+          </ogc:Filter>
+          <sld:MinScaleDenominator>8735660.374232702</sld:MinScaleDenominator>
+          <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
+            <sld:Stroke>
+              <sld:CssParameter name="stroke">#E6CCCF</sld:CssParameter>
+              <sld:CssParameter name="stroke-linecap">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+              <sld:CssParameter name="stroke-width">
+                <ogc:Function name="Exponential">
+                  <ogc:Function name="zoomLevel">
+                    <ogc:Function name="env">
+                      <ogc:Literal>wms_scale_denominator</ogc:Literal>
+                    </ogc:Function>
+                    <ogc:Literal>EPSG:3857</ogc:Literal>
+                  </ogc:Function>
+                  <ogc:Literal>1.1</ogc:Literal>
+                  <ogc:Literal>3</ogc:Literal>
+                  <ogc:Literal>1</ogc:Literal>
+                  <ogc:Literal>22</ogc:Literal>
+                  <ogc:Literal>20</ogc:Literal>
+                </ogc:Function>
+              </sld:CssParameter>
+            </sld:Stroke>
+            <sld:PerpendicularOffset>0</sld:PerpendicularOffset>
+          </sld:LineSymbolizer>
+        </sld:Rule>
+      </sld:FeatureTypeStyle>
+      <sld:FeatureTypeStyle>
+        <sld:Name>boundary_country_z5-</sld:Name>
+        <sld:Title>MBStyle boundary_country_z5-</sld:Title>
+        <sld:Abstract>Generated for boundary</sld:Abstract>
+        <sld:SemanticTypeIdentifier>LINE</sld:SemanticTypeIdentifier>
+        <sld:Rule>
+          <sld:Name>boundary_country_z5-</sld:Name>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>admin_level</ogc:PropertyName>
               <ogc:Literal>2</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <sld:MaxScaleDenominator>8735660.374232702</sld:MaxScaleDenominator>
           <sld:LineSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Stroke>
               <sld:CssParameter name="stroke">#E6CCCF</sld:CssParameter>
@@ -2247,8 +2251,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2257,7 +2261,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Regular</ogc:Literal>
+                  <ogc:Literal>Metropolis Regular</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">
@@ -2340,8 +2344,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2350,7 +2354,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Regular</ogc:Literal>
+                  <ogc:Literal>Metropolis Regular</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">
@@ -2433,8 +2437,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2443,7 +2447,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Regular</ogc:Literal>
+                  <ogc:Literal>Metropolis Regular</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">
@@ -2526,8 +2530,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2536,7 +2540,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Regular</ogc:Literal>
+                  <ogc:Literal>Metropolis Regular</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">
@@ -2620,7 +2624,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/positron-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',8,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./positron-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',8,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:Opacity>0.7</sld:Opacity>
@@ -2695,8 +2699,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2705,7 +2709,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Regular</ogc:Literal>
+                  <ogc:Literal>Metropolis Regular</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">
@@ -2789,7 +2793,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/positron-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',8,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./positron-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',8,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:Opacity>0.7</sld:Opacity>
@@ -2860,8 +2864,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -2870,7 +2874,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Regular</ogc:Literal>
+                  <ogc:Literal>Metropolis Regular</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">
@@ -2954,7 +2958,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/positron-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'star-11',0,'star-11',8,'','succeeding'))}&amp;size=${strURLEncode(1)}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./positron-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'star-11',0,'star-11',8,'','succeeding'))}&amp;size=${strURLEncode(1)}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:Opacity>0.7</sld:Opacity>
@@ -3029,8 +3033,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -3039,7 +3043,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Regular</ogc:Literal>
+                  <ogc:Literal>Metropolis Regular</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">
@@ -3123,7 +3127,7 @@
             </sld:Fill>
             <sld:Graphic>
               <sld:ExternalGraphic>
-                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://openmaptiles.github.io/positron-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',8,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
+                <sld:OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="./positron-gl-style/sprite#icon=${strURLEncode(Categorize(zoomLevel(env('wms_scale_denominator'),'EPSG:3857'),'circle-11',0,'circle-11',8,'','succeeding'))}&amp;size=${strURLEncode(0.4)}"/>
                 <sld:Format>mbsprite</sld:Format>
               </sld:ExternalGraphic>
               <sld:Opacity>0.7</sld:Opacity>
@@ -3188,8 +3192,8 @@
               <ogc:Function name="StringTransform">
                 <ogc:Function name="Concatenate">
                   <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal>
-</ogc:Literal>
+                  <ogc:Literal><![CDATA[
+]]></ogc:Literal>
                   <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
                 </ogc:Function>
                 <ogc:Literal>uppercase</ogc:Literal>
@@ -3198,7 +3202,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Regular</ogc:Literal>
+                  <ogc:Literal>Metropolis Regular</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">
@@ -3256,6 +3260,9 @@
                 <ogc:PropertyName>class</ogc:PropertyName>
                 <ogc:Literal>country</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsNull>
+                <ogc:PropertyName>iso_a2</ogc:PropertyName>
+              </ogc:PropertyIsNull>
             </ogc:And>
           </ogc:Filter>
           <sld:MinScaleDenominator>1091957.5467790877</sld:MinScaleDenominator>
@@ -3359,6 +3366,11 @@
                 <ogc:PropertyName>rank</ogc:PropertyName>
                 <ogc:Literal>2</ogc:Literal>
               </ogc:PropertyIsGreaterThanOrEqualTo>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>iso_a2</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
             </ogc:And>
           </ogc:Filter>
           <sld:MinScaleDenominator>1091957.5467790877</sld:MinScaleDenominator>
@@ -3372,7 +3384,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Regular</ogc:Literal>
+                  <ogc:Literal>Metropolis Regular</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">
@@ -3462,6 +3474,11 @@
                 <ogc:PropertyName>class</ogc:PropertyName>
                 <ogc:Literal>country</ogc:Literal>
               </ogc:PropertyIsEqualTo>
+              <ogc:Not>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>iso_a2</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+              </ogc:Not>
             </ogc:And>
           </ogc:Filter>
           <sld:MinScaleDenominator>4367830.187116351</sld:MinScaleDenominator>
@@ -3475,7 +3492,7 @@
             <sld:Font>
               <sld:CssParameter name="font-family">
                 <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Metropolis-Regular</ogc:Literal>
+                  <ogc:Literal>Metropolis Regular</ogc:Literal>
                 </ogc:Function>
               </sld:CssParameter>
               <sld:CssParameter name="font-family">

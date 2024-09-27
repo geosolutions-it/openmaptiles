@@ -2,7 +2,7 @@
   <id>LayerGroupInfoImpl--516a1bd1:16e8d9353f3:-7fd3</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
-  <name>planet</name>
+  <name>wireframe</name>
   <mimeFormats>
     <string>image/png</string>
     <string>image/jpeg</string>
@@ -39,4 +39,5 @@
   <expireClients>0</expireClients>
   <parameterFilters/>
   <gutter>0</gutter>
+  <cacheWarningSkips/>
 </GeoServerTileLayer>

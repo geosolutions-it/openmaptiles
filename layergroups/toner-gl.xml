@@ -2,6 +2,9 @@
   <id>LayerGroupInfoImpl--3cd36b64:16ef62e2f71:-7fe8</id>
   <name>toner-gl</name>
   <mode>SINGLE</mode>
+  <title>toner-gl</title>
+  <internationalTitle/>
+  <internationalAbstract/>
   <publishables>
     <published/>
   </publishables>
@@ -18,4 +21,5 @@
     <crs class="projected">EPSG:3857</crs>
   </bounds>
   <dateCreated>2019-12-12 09:56:46.624 UTC</dateCreated>
+  <dateModified>2024-09-27 09:15:49.137 UTC</dateModified>
 </layerGroup>

@@ -2,6 +2,9 @@
   <id>LayerGroupInfoImpl-416bade8:16eb18de880:-7f8e</id>
   <name>osm-bright-gl</name>
   <mode>SINGLE</mode>
+  <title>osm-bright-gl</title>
+  <internationalTitle/>
+  <internationalAbstract/>
   <publishables>
     <published/>
   </publishables>
@@ -17,4 +20,5 @@
     <maxy>2.0048966104014594E7</maxy>
     <crs class="projected">EPSG:3857</crs>
   </bounds>
+  <dateModified>2024-09-27 09:07:01.548 UTC</dateModified>
 </layerGroup>

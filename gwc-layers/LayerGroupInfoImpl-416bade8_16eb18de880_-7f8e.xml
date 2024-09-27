@@ -39,4 +39,5 @@
   <expireClients>0</expireClients>
   <parameterFilters/>
   <gutter>0</gutter>
+  <cacheWarningSkips/>
 </GeoServerTileLayer>

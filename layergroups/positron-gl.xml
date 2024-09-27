@@ -2,6 +2,9 @@
   <id>LayerGroupInfoImpl--3cd36b64:16ef62e2f71:-7ff6</id>
   <name>positron-gl</name>
   <mode>SINGLE</mode>
+  <title>positron-gl</title>
+  <internationalTitle/>
+  <internationalAbstract/>
   <publishables>
     <published/>
   </publishables>
@@ -18,4 +21,5 @@
     <crs class="projected">EPSG:3857</crs>
   </bounds>
   <dateCreated>2019-12-12 09:44:43.780 UTC</dateCreated>
+  <dateModified>2024-09-27 08:55:51.517 UTC</dateModified>
 </layerGroup>
