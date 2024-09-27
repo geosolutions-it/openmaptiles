@@ -48,3 +48,17 @@ You should see a number of layer groups:
 
 Here is how each one would look, in the area of Manhattan, New York, USA.
 
+![OSM Bright GL](images/osm-bright-gl.png)
+*OSM Bright GL*
+
+![Maptiler basic GL](images/maptiler-basic-gl.png)
+*Maptiler basic GL*
+
+![Positron GL](images/positron-gl.png)
+*Positron GL*
+
+![Toner GL](images/toner-gl.png)
+*Toner GL*
+
+![Dark matter GL](images/dark-matter-gl.png)
+*Dark matter GL*
