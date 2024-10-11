@@ -33,7 +33,7 @@ When done, the file system should look as follows:
 
 ![](images/data.png)
 
-Finally, some of these maps requires a rather rich set of fonts, to display labels in a variety of scripts. Download the [openmaptiles-fonts.zip](https://www.dropbox.com/scl/fi/o6vj1qrsi7b9v7mu6tlf1/NE2_HR_LC_SR_W_COG.tif?rlkey=wgbd8yytqhdr8g5c7q5q74lry&st=bicwwybk&dl=1) and unpack its contents inside the ``styles`` folder of this data directory. 
+Finally, some of these maps requires a rather rich set of fonts, to display labels in a variety of scripts. Download the [openmaptiles-fonts.zip](https://www.dropbox.com/scl/fi/nfrq0sd72cvz4jeqih8u8/openmaptiles-fonts.zip?rlkey=8tbq0nt6cjtpzzc36qs4ww6gh&st=ddit1d36&dl=1) and unpack its contents inside the ``styles`` folder of this data directory. 
 
 When done, the file system should look as follows:
 
