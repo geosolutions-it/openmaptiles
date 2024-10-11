@@ -6423,17 +6423,8 @@
               <![CDATA[ ]]>
             </sld:Label>
             <sld:Font>
-              <sld:CssParameter name="font-family">
-                <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Open Sans</ogc:Literal>
-                </ogc:Function>
-              </sld:CssParameter>
-              <sld:CssParameter name="font-family">
-                <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Arial Unicode MS</ogc:Literal>
-                </ogc:Function>
-              </sld:CssParameter>
-              <sld:CssParameter name="font-size">16.0</sld:CssParameter>
+              <sld:CssParameter name="font-family">Sans</sld:CssParameter>
+              <sld:CssParameter name="font-size">1</sld:CssParameter>
               <sld:CssParameter name="font-style">normal</sld:CssParameter>
               <sld:CssParameter name="font-weight">normal</sld:CssParameter>
             </sld:Font>
@@ -6508,7 +6499,7 @@
             </sld:Graphic>
             <sld:Priority>5000</sld:Priority>
             <sld:VendorOption name="repeat">75</sld:VendorOption>
-            <sld:VendorOption name="forceLeftToRight">true</sld:VendorOption>
+            <sld:VendorOption name="forceLeftToRight">false</sld:VendorOption>
             <sld:VendorOption name="followLine">true</sld:VendorOption>
             <sld:VendorOption name="maxAngleDelta">45.0</sld:VendorOption>
             <sld:VendorOption name="group">true</sld:VendorOption>
@@ -6555,17 +6546,8 @@
               <![CDATA[ ]]>
             </sld:Label>
             <sld:Font>
-              <sld:CssParameter name="font-family">
-                <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Open Sans</ogc:Literal>
-                </ogc:Function>
-              </sld:CssParameter>
-              <sld:CssParameter name="font-family">
-                <ogc:Function name="fontAlternatives">
-                  <ogc:Literal>Arial Unicode MS</ogc:Literal>
-                </ogc:Function>
-              </sld:CssParameter>
-              <sld:CssParameter name="font-size">16.0</sld:CssParameter>
+              <sld:CssParameter name="font-family">Sans</sld:CssParameter>
+              <sld:CssParameter name="font-size">1</sld:CssParameter>
               <sld:CssParameter name="font-style">normal</sld:CssParameter>
               <sld:CssParameter name="font-weight">normal</sld:CssParameter>
             </sld:Font>
@@ -6640,7 +6622,7 @@
             </sld:Graphic>
             <sld:Priority>6000</sld:Priority>
             <sld:VendorOption name="repeat">75</sld:VendorOption>
-            <sld:VendorOption name="forceLeftToRight">true</sld:VendorOption>
+            <sld:VendorOption name="forceLeftToRight">false</sld:VendorOption>
             <sld:VendorOption name="followLine">true</sld:VendorOption>
             <sld:VendorOption name="maxAngleDelta">45.0</sld:VendorOption>
             <sld:VendorOption name="group">true</sld:VendorOption>
