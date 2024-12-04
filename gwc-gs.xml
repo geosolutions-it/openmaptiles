@@ -1,6 +1,7 @@
 <GeoServerGWCConfig>
   <version>1.1.0</version>
   <directWMSIntegrationEnabled>false</directWMSIntegrationEnabled>
+  <requireTiledParameter>true</requireTiledParameter>
   <WMSCEnabled>true</WMSCEnabled>
   <TMSEnabled>true</TMSEnabled>
   <securityEnabled>false</securityEnabled>
@@ -22,6 +23,7 @@
   <cacheNonDefaultStyles>true</cacheNonDefaultStyles>
   <metaTilingX>4</metaTilingX>
   <metaTilingY>4</metaTilingY>
+  <metaTilingThreads>32</metaTilingThreads>
   <gutter>0</gutter>
   <defaultCachingGridSetIds>
     <string>EPSG:4326</string>
