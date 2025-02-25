@@ -39,12 +39,15 @@
   <projectionPolicy>REPROJECT_TO_DECLARED</projectionPolicy>
   <enabled>true</enabled>
   <metadata>
+    <entry key="cachingEnabled">false</entry>
     <entry key="dirName">natural_earth_shaded_relief_NE2_HR_LC_SR</entry>
   </metadata>
   <store class="coverageStore">
     <id>CoverageStoreInfoImpl-6edd2b4a:16ef992e608:-7ff9</id>
   </store>
   <serviceConfiguration>false</serviceConfiguration>
+  <internationalTitle/>
+  <internationalAbstract/>
   <nativeFormat>GeoTIFF</nativeFormat>
   <grid dimension="2">
     <range>
@@ -62,16 +65,11 @@
     <crs>EPSG:4326</crs>
   </grid>
   <supportedFormats>
-    <string>org.geoserver.catalog.testreader.CustomFormat</string>
-    <string>ArcGrid</string>
     <string>GEOTIFF</string>
-    <string>ImageMosaic</string>
     <string>GIF</string>
     <string>PNG</string>
     <string>JPEG</string>
     <string>TIFF</string>
-    <string>GeoPackage (mosaic)</string>
-    <string>MBTiles</string>
   </supportedFormats>
   <interpolationMethods>
     <string>nearest neighbor</string>
