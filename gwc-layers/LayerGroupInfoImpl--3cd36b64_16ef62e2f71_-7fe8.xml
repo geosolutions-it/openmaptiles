@@ -2,10 +2,10 @@
   <id>LayerGroupInfoImpl--3cd36b64:16ef62e2f71:-7fe8</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
-  <name>toner-gl</name>
+  <name>omt:toner-gl</name>
   <mimeFormats>
-    <string>image/png</string>
     <string>image/jpeg</string>
+    <string>image/png</string>
   </mimeFormats>
   <gridSubsets>
     <gridSubset>

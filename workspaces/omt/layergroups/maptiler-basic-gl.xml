@@ -1,8 +1,11 @@
 <layerGroup>
-  <id>LayerGroupInfoImpl--3cd36b64:16ef62e2f71:-7ff6</id>
-  <name>positron-gl</name>
+  <id>LayerGroupInfoImpl--3cd36b64:16ef62e2f71:-7ff3</id>
+  <name>maptiler-basic-gl</name>
   <mode>SINGLE</mode>
-  <title>positron-gl</title>
+  <title>maptiler-basic-gl</title>
+  <workspace>
+    <id>WorkspaceInfoImpl-78ff667e:12476299803:-7ffd</id>
+  </workspace>
   <internationalTitle/>
   <internationalAbstract/>
   <publishables>
@@ -10,7 +13,7 @@
   </publishables>
   <styles>
     <style>
-      <id>StyleInfoImpl--3cd36b64:16ef62e2f71:-7ffc</id>
+      <id>StyleInfoImpl--3cd36b64:16ef62e2f71:-7ff5</id>
     </style>
   </styles>
   <bounds>
@@ -20,6 +23,6 @@
     <maxy>2.0048966104014594E7</maxy>
     <crs class="projected">EPSG:3857</crs>
   </bounds>
-  <dateCreated>2019-12-12 09:44:43.780 UTC</dateCreated>
-  <dateModified>2024-09-27 08:55:51.517 UTC</dateModified>
+  <dateCreated>2019-12-12 09:47:39.895 UTC</dateCreated>
+  <dateModified>2025-02-25 09:59:38.273 UTC</dateModified>
 </layerGroup>

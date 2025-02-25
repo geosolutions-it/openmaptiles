@@ -2,10 +2,10 @@
   <id>LayerGroupInfoImpl--3cd36b64:16ef62e2f71:-7fef</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
-  <name>dark-matter-gl</name>
+  <name>omt:dark-matter-gl</name>
   <mimeFormats>
-    <string>image/png</string>
     <string>image/jpeg</string>
+    <string>image/png</string>
   </mimeFormats>
   <gridSubsets>
     <gridSubset>

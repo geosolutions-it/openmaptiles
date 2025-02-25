@@ -2,17 +2,33 @@
   <id>LayerGroupInfoImpl--3cd36b64:16ef62e2f71:-7ff3</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
-  <name>maptiler-basic-gl</name>
+  <name>omt:maptiler-basic-gl</name>
   <mimeFormats>
-    <string>image/png</string>
     <string>image/jpeg</string>
+    <string>image/png</string>
   </mimeFormats>
   <gridSubsets>
     <gridSubset>
       <gridSetName>EPSG:4326</gridSetName>
+      <extent>
+        <coords>
+          <double>-180.0</double>
+          <double>-85.06</double>
+          <double>180.0</double>
+          <double>85.06</double>
+        </coords>
+      </extent>
     </gridSubset>
     <gridSubset>
       <gridSetName>EPSG:900913</gridSetName>
+      <extent>
+        <coords>
+          <double>-2.003750834E7</double>
+          <double>-2.003750834E7</double>
+          <double>2.003750834E7</double>
+          <double>2.003750834E7</double>
+        </coords>
+      </extent>
     </gridSubset>
   </gridSubsets>
   <metaWidthHeight>

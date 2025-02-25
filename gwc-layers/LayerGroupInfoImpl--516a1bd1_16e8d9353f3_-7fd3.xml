@@ -2,10 +2,10 @@
   <id>LayerGroupInfoImpl--516a1bd1:16e8d9353f3:-7fd3</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
-  <name>wireframe</name>
+  <name>omt:wireframe</name>
   <mimeFormats>
-    <string>image/png</string>
     <string>image/jpeg</string>
+    <string>image/png</string>
   </mimeFormats>
   <gridSubsets>
     <gridSubset>

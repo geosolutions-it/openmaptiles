@@ -1,8 +1,11 @@
 <layerGroup>
-  <id>LayerGroupInfoImpl--3cd36b64:16ef62e2f71:-7fe8</id>
-  <name>toner-gl</name>
+  <id>LayerGroupInfoImpl-416bade8:16eb18de880:-7f8e</id>
+  <name>osm-bright-gl</name>
   <mode>SINGLE</mode>
-  <title>toner-gl</title>
+  <title>osm-bright-gl</title>
+  <workspace>
+    <id>WorkspaceInfoImpl-78ff667e:12476299803:-7ffd</id>
+  </workspace>
   <internationalTitle/>
   <internationalAbstract/>
   <publishables>
@@ -10,7 +13,7 @@
   </publishables>
   <styles>
     <style>
-      <id>StyleInfoImpl--3cd36b64:16ef62e2f71:-7feb</id>
+      <id>StyleInfoImpl-4c2a24d5:16eb16f5c77:-7ffb</id>
     </style>
   </styles>
   <bounds>
@@ -20,6 +23,5 @@
     <maxy>2.0048966104014594E7</maxy>
     <crs class="projected">EPSG:3857</crs>
   </bounds>
-  <dateCreated>2019-12-12 09:56:46.624 UTC</dateCreated>
-  <dateModified>2024-09-27 09:15:49.137 UTC</dateModified>
+  <dateModified>2025-02-25 09:59:42.264 UTC</dateModified>
 </layerGroup>

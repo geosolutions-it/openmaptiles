@@ -3,6 +3,9 @@
   <name>dark-matter-gl</name>
   <mode>SINGLE</mode>
   <title>dark-matter-gl</title>
+  <workspace>
+    <id>WorkspaceInfoImpl-78ff667e:12476299803:-7ffd</id>
+  </workspace>
   <internationalTitle/>
   <internationalAbstract/>
   <publishables>
@@ -21,5 +24,5 @@
     <crs class="projected">EPSG:3857</crs>
   </bounds>
   <dateCreated>2019-12-12 09:51:18.184 UTC</dateCreated>
-  <dateModified>2024-09-27 08:57:24.964 UTC</dateModified>
+  <dateModified>2025-02-25 09:59:34.47 UTC</dateModified>
 </layerGroup>

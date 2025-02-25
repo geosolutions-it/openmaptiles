@@ -2,17 +2,33 @@
   <id>LayerGroupInfoImpl-416bade8:16eb18de880:-7f8e</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
-  <name>osm-bright-gl</name>
+  <name>omt:osm-bright-gl</name>
   <mimeFormats>
-    <string>image/png</string>
     <string>image/jpeg</string>
+    <string>image/png</string>
   </mimeFormats>
   <gridSubsets>
     <gridSubset>
       <gridSetName>EPSG:4326</gridSetName>
+      <extent>
+        <coords>
+          <double>-180.0</double>
+          <double>-85.06</double>
+          <double>180.0</double>
+          <double>85.06</double>
+        </coords>
+      </extent>
     </gridSubset>
     <gridSubset>
       <gridSetName>EPSG:900913</gridSetName>
+      <extent>
+        <coords>
+          <double>-2.003750834E7</double>
+          <double>-2.003750834E7</double>
+          <double>2.003750834E7</double>
+          <double>2.003750834E7</double>
+        </coords>
+      </extent>
     </gridSubset>
   </gridSubsets>
   <metaWidthHeight>
