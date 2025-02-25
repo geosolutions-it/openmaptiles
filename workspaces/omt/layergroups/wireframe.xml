@@ -3,6 +3,9 @@
   <name>wireframe</name>
   <mode>SINGLE</mode>
   <title>wireframe</title>
+  <workspace>
+    <id>WorkspaceInfoImpl-78ff667e:12476299803:-7ffd</id>
+  </workspace>
   <internationalTitle/>
   <internationalAbstract/>
   <publishables>
@@ -77,5 +80,5 @@
     <crs class="projected">EPSG:3857</crs>
   </bounds>
   <dateCreated>2019-11-21 10:55:40.211 UTC</dateCreated>
-  <dateModified>2025-02-25 09:51:40.190 UTC</dateModified>
+  <dateModified>2025-02-25 09:59:55.98 UTC</dateModified>
 </layerGroup>

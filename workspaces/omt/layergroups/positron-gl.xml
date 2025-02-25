@@ -1,8 +1,11 @@
 <layerGroup>
-  <id>LayerGroupInfoImpl-416bade8:16eb18de880:-7f8e</id>
-  <name>osm-bright-gl</name>
+  <id>LayerGroupInfoImpl--3cd36b64:16ef62e2f71:-7ff6</id>
+  <name>positron-gl</name>
   <mode>SINGLE</mode>
-  <title>osm-bright-gl</title>
+  <title>positron-gl</title>
+  <workspace>
+    <id>WorkspaceInfoImpl-78ff667e:12476299803:-7ffd</id>
+  </workspace>
   <internationalTitle/>
   <internationalAbstract/>
   <publishables>
@@ -10,7 +13,7 @@
   </publishables>
   <styles>
     <style>
-      <id>StyleInfoImpl-4c2a24d5:16eb16f5c77:-7ffb</id>
+      <id>StyleInfoImpl--3cd36b64:16ef62e2f71:-7ffc</id>
     </style>
   </styles>
   <bounds>
@@ -20,5 +23,6 @@
     <maxy>2.0048966104014594E7</maxy>
     <crs class="projected">EPSG:3857</crs>
   </bounds>
-  <dateModified>2024-09-27 09:07:01.548 UTC</dateModified>
+  <dateCreated>2019-12-12 09:44:43.780 UTC</dateCreated>
+  <dateModified>2025-02-25 09:59:46.537 UTC</dateModified>
 </layerGroup>
