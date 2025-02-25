@@ -20,7 +20,7 @@
     AXIS[&quot;Geodetic longitude&quot;, EAST], 
     AXIS[&quot;Geodetic latitude&quot;, NORTH], 
     AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]], 
-  PROJECTION[&quot;Popular Visualisation Pseudo Mercator&quot;], 
+  PROJECTION[&quot;Popular Visualisation Pseudo Mercator&quot;, AUTHORITY[&quot;EPSG&quot;,&quot;1024&quot;]], 
   PARAMETER[&quot;semi_minor&quot;, 6378137.0], 
   PARAMETER[&quot;latitude_of_origin&quot;, 0.0], 
   PARAMETER[&quot;central_meridian&quot;, 0.0], 
@@ -55,6 +55,8 @@
     <id>DataStoreInfoImpl--73e6758a:16e8d6b0be2:-7ffa</id>
   </store>
   <serviceConfiguration>false</serviceConfiguration>
+  <internationalTitle/>
+  <internationalAbstract/>
   <maxFeatures>0</maxFeatures>
   <numDecimals>0</numDecimals>
   <padWithZeros>false</padWithZeros>
