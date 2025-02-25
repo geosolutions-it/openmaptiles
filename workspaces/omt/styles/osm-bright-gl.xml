@@ -1,10 +1,13 @@
 <style>
   <id>StyleInfoImpl-4c2a24d5:16eb16f5c77:-7ffb</id>
   <name>osm-bright-gl</name>
+  <workspace>
+    <id>WorkspaceInfoImpl-78ff667e:12476299803:-7ffd</id>
+  </workspace>
   <format>mbstyle</format>
   <languageVersion>
     <version>1.0.0</version>
   </languageVersion>
   <filename>osm-bright-gl.json</filename>
-  <dateModified>2024-10-11 15:53:11.921 UTC</dateModified>
+  <dateModified>2025-02-25 09:29:45.76 UTC</dateModified>
 </style>

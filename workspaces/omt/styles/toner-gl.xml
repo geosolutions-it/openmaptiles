@@ -1,11 +1,14 @@
 <style>
   <id>StyleInfoImpl--3cd36b64:16ef62e2f71:-7feb</id>
   <name>toner-gl</name>
+  <workspace>
+    <id>WorkspaceInfoImpl-78ff667e:12476299803:-7ffd</id>
+  </workspace>
   <format>mbstyle</format>
   <languageVersion>
     <version>1.0.0</version>
   </languageVersion>
   <filename>toner-gl.json</filename>
   <dateCreated>2019-12-12 09:55:20.143 UTC</dateCreated>
-  <dateModified>2024-09-27 09:15:37.830 UTC</dateModified>
+  <dateModified>2025-02-25 09:30:05.384 UTC</dateModified>
 </style>

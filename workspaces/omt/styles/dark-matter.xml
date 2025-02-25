@@ -1,11 +1,14 @@
 <style>
   <id>StyleInfoImpl--3cd36b64:16ef62e2f71:-7ff2</id>
   <name>dark-matter</name>
+  <workspace>
+    <id>WorkspaceInfoImpl-78ff667e:12476299803:-7ffd</id>
+  </workspace>
   <format>mbstyle</format>
   <languageVersion>
     <version>1.0.0</version>
   </languageVersion>
   <filename>dark-matter.json</filename>
   <dateCreated>2019-12-12 09:49:56.854 UTC</dateCreated>
-  <dateModified>2024-09-27 08:57:36.960 UTC</dateModified>
+  <dateModified>2025-02-25 09:28:26.917 UTC</dateModified>
 </style>
