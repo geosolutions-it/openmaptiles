@@ -953,7 +953,7 @@
       "layout": {
         "symbol-placement": "line",
         "symbol-spacing": 350,
-        "text-field": "{name:latin} {name:nonlatin}",
+        "text-field": "{name:en}",
         "text-font": [
           "Noto Sans Italic"
         ],
@@ -988,7 +988,7 @@
       "layout": {
         "symbol-placement": "line",
         "symbol-spacing": 200,
-        "text-field": "{name:latin} {name:nonlatin}",
+        "text-field": "{name:en}",
         "text-font": [
           "Noto Sans Bold Italic"
         ],
@@ -1035,7 +1035,7 @@
       "layout": {
         "symbol-placement": "point",
         "symbol-spacing": 250,
-        "text-field": "{name:latin} {name:nonlatin}",
+        "text-field": "{name:en}",
         "text-font": [
           "Noto Sans Italic"
         ],
@@ -1071,7 +1071,7 @@
       "layout": {
         "symbol-placement": "point",
         "symbol-spacing": 350,
-        "text-field": "{name:latin} {name:nonlatin}",
+        "text-field": "{name:en}",
         "text-font": [
           "Noto Sans Italic"
         ],
@@ -1101,7 +1101,7 @@
       "id": "road_label_primary",
       "layout": {
         "symbol-placement": "line",
-        "text-field": "{name:latin} {name:nonlatin}",
+        "text-field": "{name:en}",
         "text-font": {
           "stops": [
             [
@@ -1165,7 +1165,7 @@
       "id": "road_label_secondary",
       "layout": {
         "symbol-placement": "line",
-        "text-field": "{name:latin} {name:nonlatin}",
+        "text-field": "{name:en}",
         "text-font": {
           "stops": [
             [
@@ -1215,7 +1215,7 @@
       "id": "place_label_park",
       "layout": {
         "symbol-placement": "point",
-        "text-field": "{name:latin}",
+        "text-field": "{name:en}",
         "text-font": [
           "Noto Sans Italic"
         ],
@@ -1253,7 +1253,7 @@
       "id": "place_label_village",
       "layout": {
         "text-anchor": "center",
-        "text-field": "{name:latin} {name:nonlatin}",
+        "text-field": "{name:en}",
         "text-font": {
           "stops": [
             [
@@ -1313,7 +1313,7 @@
       "id": "place_label_city",
       "layout": {
         "icon-anchor": "center",
-        "text-field": "{name:latin}",
+        "text-field": "{name:en}",
         "text-font": {
           "stops": [
             [
@@ -1386,7 +1386,7 @@
       "id": "place_label_town",
       "layout": {
         "icon-anchor": "center",
-        "text-field": "{name:latin}",
+        "text-field": "{name:en}",
         "text-font": {
           "stops": [
             [
@@ -1445,7 +1445,7 @@
       ],
       "id": "place_state-label",
       "layout": {
-        "text-field": "{name:latin} {name:nonlatin}",
+        "text-field": "{name:en}",
         "text-font": [
           "Nunito Semi Bold"
         ],
@@ -1474,7 +1474,7 @@
       "id": "place_label_country",
       "layout": {
         "text-allow-overlap": false,
-        "text-field": "{name:latin}",
+        "text-field": "{name:en}",
         "text-font": {
           "stops": [
             [
@@ -1532,7 +1532,7 @@
       ],
       "id": "place_label_continent",
       "layout": {
-        "text-field": "{name:latin}",
+        "text-field": "{name:en}",
         "text-font": [
           "Nunito Extra Bold"
         ],

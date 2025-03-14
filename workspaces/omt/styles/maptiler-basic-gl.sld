@@ -2569,9 +2569,7 @@
           <sld:MaxScaleDenominator>17061.836668423246</sld:MaxScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
-]]>
-              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
+              <ogc:PropertyName>name:en</ogc:PropertyName>
             </sld:Label>
             <sld:Font>
               <sld:CssParameter name="font-family">
@@ -2652,9 +2650,7 @@
           <sld:MaxScaleDenominator>272989.38669477194</sld:MaxScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
-]]>
-              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
+              <ogc:PropertyName>name:en</ogc:PropertyName>
             </sld:Label>
             <sld:Font>
               <sld:CssParameter name="font-family">
@@ -2736,11 +2732,7 @@
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
               <ogc:Function name="StringTransform">
-                <ogc:Function name="Concatenate">
-                  <ogc:PropertyName>name:latin</ogc:PropertyName>
-                  <ogc:Literal><![CDATA[ ]]></ogc:Literal>
-                  <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
-                </ogc:Function>
+                <ogc:PropertyName>name:en</ogc:PropertyName>
                 <ogc:Literal>uppercase</ogc:Literal>
               </ogc:Function>
             </sld:Label>
@@ -2853,9 +2845,7 @@
           <sld:MaxScaleDenominator>1091957.5467790877</sld:MaxScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
-]]>
-              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
+              <ogc:PropertyName>name:en</ogc:PropertyName>
             </sld:Label>
             <sld:Font>
               <sld:CssParameter name="font-family">
@@ -2933,9 +2923,7 @@
           <sld:MinScaleDenominator>4265.4591671058115</sld:MinScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName><![CDATA[
-]]>
-              <ogc:PropertyName>name:nonlatin</ogc:PropertyName>
+              <ogc:PropertyName>name:en</ogc:PropertyName>
             </sld:Label>
             <sld:Font>
               <sld:CssParameter name="font-family">
@@ -3016,7 +3004,7 @@
           <sld:MinScaleDenominator>68247.34667369298</sld:MinScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <ogc:PropertyName>name:en</ogc:PropertyName>
             </sld:Label>
             <sld:Font>
               <sld:CssParameter name="font-family">
@@ -3099,7 +3087,7 @@
           <sld:MinScaleDenominator>68247.34667369298</sld:MinScaleDenominator>
           <sld:TextSymbolizer uom="http://www.opengeospatial.org/se/units/pixel">
             <sld:Label>
-              <ogc:PropertyName>name:latin</ogc:PropertyName>
+              <ogc:PropertyName>name:en</ogc:PropertyName>
             </sld:Label>
             <sld:Font>
               <sld:CssParameter name="font-family">
